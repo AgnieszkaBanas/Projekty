@@ -28,5 +28,4 @@ public:
 	void play();
 	void setInitialPosition();
 	void setColorIterator(int colorIterator);
-	void changeEnableWalking(int e);
 };

@@ -17,9 +17,15 @@ public:
 	{
 		ifCat = pIfCat;
 		sizeOfImage = pSizeOfImage;
-		if (!texAnimals.loadFromFile(imgDirectory))
+		try
 		{
-			cerr << "Error";
+			string napis;
+			if(!texAnimals.loadFromFile(imgDirectory))
+			throw napis;
+		}
+		catch (string napis)
+		{
+			cout << "Nie mozna zaladowac obrazka." << endl;
 		}
 		this->setTexture(texAnimals);
 		this->setPosition(posX,posY);

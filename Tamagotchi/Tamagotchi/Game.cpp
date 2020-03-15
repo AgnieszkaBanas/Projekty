@@ -526,6 +526,7 @@ void Game::playground()
 {
 	Dog*dog = dynamic_cast<Dog*>(animal);
 	dog->setPosition(200, 300);
+	dog->setInitialPosition();
 	dog->changeEnableWalking(1);
 	window.setView(window.getDefaultView());
 	Ball ball(200,200,20);
