@@ -2,23 +2,20 @@
 #include <SFML/Graphics.hpp>
 #include <sstream>
 #include <iostream>
-#include "GraphicalObject.h"
+#include "MyButton.h"
 
 using namespace std;
 using namespace sf;
 
-class TextButton: public GraphicalObject
+class TextButton: public MyButton
 {
-	Font font;
 	Text text;
 	Color textColor;
-	string textState;
 public:
 	//MButton() {};
-	TextButton(string ptextState, Color pTextColor, int pTextSize, int pX, int pY):GraphicalObject(pX,pY,pTextSize)
+	TextButton(string ptextState, Color pTextColor, int pTextSize, int pX, int pY):MyButton(pX,pY,pTextSize,ptextState)
 	{
 		textColor = pTextColor;
-		textState = ptextState;
 	};
 	void Draw(RenderWindow &window);
 	float getX();

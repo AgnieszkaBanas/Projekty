@@ -3,11 +3,7 @@
 
 void TextButton::Draw(RenderWindow & window)
 {
-	if (!font.loadFromFile("BebasNeue-Regular.ttf"))
-	{
-		cout << "cos poszlo nie tak :|";
-	}
-	if (textState == "new game")
+	if (buttonText == "new game")
 	{
 		text.setFont(font);
 		text.setFillColor(textColor);
@@ -17,7 +13,7 @@ void TextButton::Draw(RenderWindow & window)
 		text.setCharacterSize(size);
 		text.setPosition(posX, posY);
 	}
-	if (textState == "game over")
+	if (buttonText == "game over")
 	{
 		text.setFont(font);
 		text.setFillColor(textColor);
@@ -25,7 +21,7 @@ void TextButton::Draw(RenderWindow & window)
 		text.setPosition(posX, posY);
 		text.setString("GAME OVER! Your Score:");
 	}
-	if (textState == "exit")
+	if (buttonText == "exit")
 	{
 		text.setFont(font);
 		text.setFillColor(textColor);
@@ -33,7 +29,7 @@ void TextButton::Draw(RenderWindow & window)
 		text.setPosition(posX, posY);
 		text.setString("End Game");
 	}
-	if (textState == "continue game")
+	if (buttonText == "continue game")
 	{
 		text.setFont(font);
 		text.setFillColor(textColor);
@@ -43,7 +39,7 @@ void TextButton::Draw(RenderWindow & window)
 		text.setPosition(posX, posY);
 		text.setString("CONTINUE GAME");
 	}
-	if (textState == "back")
+	if (buttonText == "back")
 	{
 		text.setFont(font);
 		text.setFillColor(textColor);

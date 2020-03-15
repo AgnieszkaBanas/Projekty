@@ -138,6 +138,7 @@
     <ClInclude Include="Animal.h" />
     <ClInclude Include="AnimalPicture.h" />
     <ClInclude Include="Ball.h" />
+    <ClInclude Include="MyButton.h" />
     <ClInclude Include="Cat.h" />
     <ClInclude Include="TextButton.h" />
     <ClInclude Include="Dog.h" />
