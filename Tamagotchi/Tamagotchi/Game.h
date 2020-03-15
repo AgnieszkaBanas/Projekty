@@ -10,7 +10,7 @@ using namespace sf;
 
 class Game
 {
-	vector<AnimalPicture*> dogPicture;
+	vector<AnimalPicture*> animalPicture;
 	Animal*animal;
 	map<string,int> colorOfDog;
 	View view;
@@ -51,9 +51,6 @@ public:
 			//view.reset(FloatRect(0, 0, 1200, 800));
 			//view.setViewport(FloatRect(0, 0, 0.5f, 1.0f));
 			colorOfDog = { {"brown",0},{"black",4},{"grey",8} };
-			dogPicture.push_back(new AnimalPicture(0, "fafik6.png", 2.5, 220, 300));
-			dogPicture.push_back(new AnimalPicture(4, "fafik6.png", 2.5, 520, 300));
-			dogPicture.push_back(new AnimalPicture(8, "fafik6.png", 2.5, 820, 300));
 		}
 	};
 	void showMenu();

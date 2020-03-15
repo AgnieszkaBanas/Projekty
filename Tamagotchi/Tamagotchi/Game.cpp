@@ -422,6 +422,19 @@ void Game::chooseColor()
 	gui.add(color2);
 	gui.add(color3);
 
+	if (typeid(*animal) == typeid(Dog))
+	{
+		animalPicture.push_back(new AnimalPicture(0, "fafik6.png", 2.5, 220, 300, 86,1));
+		animalPicture.push_back(new AnimalPicture(4, "fafik6.png", 2.5, 520, 300, 86,1));
+		animalPicture.push_back(new AnimalPicture(8, "fafik6.png", 2.5, 820, 300, 86,1));
+	}
+	else
+	{
+		animalPicture.push_back(new AnimalPicture(0, "cat1.png", 6, 220, 300, 32,0));
+		animalPicture.push_back(new AnimalPicture(4, "cat1.png", 6, 520, 300, 32,0));
+		animalPicture.push_back(new AnimalPicture(8, "cat1.png", 6, 820, 300, 32,0));
+	}
+
 	map<string,int>::iterator cur;
 	Event event;
 	while (gameState == "choose color")
@@ -460,9 +473,9 @@ void Game::chooseColor()
 		}
 		window.draw(background);
 		gui.draw();
-		for (int i = 0; i < dogPicture.size(); i++)
+		for (int i = 0; i < animalPicture.size(); i++)
 		{
-			dogPicture[i]->Draw(window);
+			animalPicture[i]->Draw(window);
 		}
 		window.display();
 	}
