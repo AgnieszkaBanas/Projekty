@@ -1,6 +1,6 @@
 #include "Cat.h"
 
-void Cat::moveDog(char direction, float moveSpeed)
+void Cat::moveAnimal(char direction, float moveSpeed)
 {
 	if (enableWalking == 1)
 	{
@@ -54,14 +54,7 @@ void Cat::eat()
 
 void Cat::sleep()
 {
-	this->setTextureRect(IntRect(32 * 3, 0, 32, 32));
-	/*
-	counterSleeping++;
-	if (counterSleeping == 2)
-	{
-		counterSleeping = 0;
-	}
-	*/
+	this->setTextureRect(IntRect(32 * (3+colorIterator), 0, 32, 32));
 }
 
 void Cat::play()

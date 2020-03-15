@@ -24,7 +24,7 @@ public:
 	{
 		window.draw(*this);
 	}
-	void moveDog(char direction, float moveSpeed);
+	void moveAnimal(char direction, float moveSpeed);
 	void eat();
 	void sleep();
 	void play();

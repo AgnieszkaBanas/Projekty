@@ -145,22 +145,22 @@ void Game::startGame()
 
 		if (Keyboard::isKeyPressed(Keyboard::Left))
 		{
-			animal->moveDog('l', 6.0);
+			animal->moveAnimal('l', 6.0);
 		}
 
 		if (Keyboard::isKeyPressed(Keyboard::Right))
 		{
-			animal->moveDog('r', 6.0);
+			animal->moveAnimal('r', 6.0);
 		}
 
 		if (Keyboard::isKeyPressed(Keyboard::Up))
 		{
-			animal->moveDog('u', 6.0);
+			animal->moveAnimal('u', 6.0);
 		}
 
 		if (Keyboard::isKeyPressed(Keyboard::Down))
 		{
-			animal->moveDog('d', 6.0);
+			animal->moveAnimal('d', 6.0);
 		}
 		position.x = animal->getPosition().x + 24 - (1200 / 2);
 		position.y = animal->getPosition().y + 24 - (800 / 2);
@@ -545,22 +545,22 @@ void Game::playground()
 		
 		if (Keyboard::isKeyPressed(Keyboard::Left))
 		{
-			dog->moveDog('l', 6.0);
+			dog->moveAnimal('l', 6.0);
 		}
 
 		if (Keyboard::isKeyPressed(Keyboard::Right))
 		{
-			dog->moveDog('r', 6.0);
+			dog->moveAnimal('r', 6.0);
 		}
 
 		if (Keyboard::isKeyPressed(Keyboard::Up))
 		{
-			dog->moveDog('u', 6.0);
+			dog->moveAnimal('u', 6.0);
 		}
 
 		if (Keyboard::isKeyPressed(Keyboard::Down))
 		{
-			dog->moveDog('d', 6.0);
+			dog->moveAnimal('d', 6.0);
 		}
 		window.clear();
 		ball.update(dog);

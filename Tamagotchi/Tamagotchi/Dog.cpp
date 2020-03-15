@@ -1,7 +1,7 @@
 #include "Dog.h"
 #include "Ball.h"
 
-void Dog:: moveDog(char direction, float moveSpeed)
+void Dog:: moveAnimal(char direction, float moveSpeed)
 {
 	if (enableWalking == 1)
 	{
