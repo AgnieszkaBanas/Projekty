@@ -78,12 +78,12 @@ void Game::showMenu()
 void Game::startGame()
 {
 	tgui::Gui gui(window);
-	shared_ptr<GuiButton> tab1(new GuiButton(200, 10, 50, "EAT"));
-	shared_ptr<GuiButton> tab2(new GuiButton(300, 10, 50, "SLEEP"));
-	shared_ptr<GuiButton> tab3(new GuiButton(400, 10, 50, "PLAY"));
+	shared_ptr<GuiButton> tab1(new GuiButton(200, 10, 50, "EAT",20));
+	shared_ptr<GuiButton> tab2(new GuiButton(300, 10, 50, "SLEEP",20));
+	shared_ptr<GuiButton> tab3(new GuiButton(400, 10, 50, "PLAY",20));
 	
-	shared_ptr<GuiButton> tab(new GuiButton(800,0,250,""));
-	shared_ptr<GuiButton> backButton(new GuiButton(900, 700, 70, "BACK"));
+	shared_ptr<GuiButton> tab(new GuiButton(800,0,250,"",20));
+	shared_ptr<GuiButton> backButton(new GuiButton(900, 700, 70, "BACK",20));
 	shared_ptr<ProgBar> progBar1(new ProgBar(820, 100, 50));
 	shared_ptr<ProgBar> progBar2(new ProgBar(920, 100, 50));
 	shared_ptr<ProgBar> progBar3(new ProgBar(1020, 100, 50));
@@ -415,9 +415,9 @@ void Game::chooseColor()
 {
 	tgui::Gui gui(window);
 	
-	shared_ptr<GuiButton> color1(new GuiButton(250, 500, 90, "BROWN"));
-	shared_ptr<GuiButton> color2(new GuiButton(550, 500, 90, "BLACK"));
-	shared_ptr<GuiButton> color3(new GuiButton(850, 500, 90, "GREY"));
+	shared_ptr<GuiButton> color1(new GuiButton(250, 500, 90, "1",40));
+	shared_ptr<GuiButton> color2(new GuiButton(550, 500, 90, "2",40));
+	shared_ptr<GuiButton> color3(new GuiButton(850, 500, 90, "3",40));
 	gui.add(color1);
 	gui.add(color2);
 	gui.add(color3);
@@ -473,8 +473,8 @@ void Game::chooseAnimal()
 {
 	tgui::Gui gui(window);
 	
-	shared_ptr<GuiButton> catButton(new GuiButton(450, 400, 80, "CAT"));
-	shared_ptr<GuiButton> dogButton(new GuiButton(650, 400, 80, "DOG"));
+	shared_ptr<GuiButton> catButton(new GuiButton(450, 400, 80, "CAT",30));
+	shared_ptr<GuiButton> dogButton(new GuiButton(650, 400, 80, "DOG",30));
 	//catButton->setRenderer(theme.getRenderer("catButton"));
 	gui.add(catButton);
 	gui.add(dogButton);
