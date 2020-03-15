@@ -515,7 +515,7 @@ void Game::playground()
 	dog->setPosition(200, 300);
 	dog->changeEnableWalking(1);
 	window.setView(window.getDefaultView());
-	Ball ball(20);
+	Ball ball(200,200,20);
 
 	Event event;
 	while (gameState == "play")
