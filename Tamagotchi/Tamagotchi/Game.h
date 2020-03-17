@@ -2,9 +2,11 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
+#include <memory>
 #include "TextButton.h"
 #include "Dog.h"
 #include "AnimalPicture.h"
+#include "Interface.h"
 using namespace std;
 using namespace sf;
 
@@ -20,7 +22,8 @@ class Game
 	Vector2u windowSize;   //Added to store window size.
 	float scaleX, scaleY;
 	//vector<Score*> scores;
-	vector<TextButton*> buttons;
+	vector<shared_ptr<Interface>> myInterface;
+	//vector<TextButton*> buttons;
 	Font font;
 	string gameState;
 	RenderWindow window;
@@ -51,6 +54,8 @@ public:
 			//view.reset(FloatRect(0, 0, 1200, 800));
 			//view.setViewport(FloatRect(0, 0, 0.5f, 1.0f));
 			colorOfDog = { {"brown",0},{"black",4},{"grey",8} };
+			
+			//myInterface.push_back(shared_ptr<Interface>(new GuiButton(1,1,1,"",1)));
 		}
 	};
 	void showMenu();

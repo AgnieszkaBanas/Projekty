@@ -18,4 +18,8 @@ public:
 		this->setFillColor(Color::Red);
 		this->setBorderColor(Color::Green);
 	}
+	FloatRect gGlobalBounds();
+	void Draw(RenderWindow &window);
+	void changeColor(Color textColor);
+	bool containsMouse(Vector2f & mouse);
 };

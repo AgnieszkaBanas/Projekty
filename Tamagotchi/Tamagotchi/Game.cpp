@@ -12,11 +12,6 @@
 #include <TGUI/Widgets/ClickableWidget.hpp>
 #include "Ball.h"
 
-float random_float(float a, float b)
-{
-	return ((b - a) * ((float)rand() / RAND_MAX)) + a;
-}
-
 void Game::showMenu()
 {
 	Event event;
@@ -33,12 +28,12 @@ void Game::showMenu()
 			if (event.type == Event::MouseButtonReleased)
 			{
 				
-				if (this->buttons[0]->gGlobalBounds().contains(mouse) && event.mouseButton.button == Mouse::Left)
+				if (this->myInterface[0]->gGlobalBounds().contains(mouse) && event.mouseButton.button == Mouse::Left)
 				{
 					gameState = "choose animal";
 				}
 
-				if (this->buttons[3]->gGlobalBounds().contains(mouse) && event.mouseButton.button == Mouse::Left)
+				if (this->myInterface[3]->gGlobalBounds().contains(mouse) && event.mouseButton.button == Mouse::Left)
 				{
 					gameState = "continue game";
 				}
@@ -49,24 +44,24 @@ void Game::showMenu()
 		window.draw(background);
 
 		
-		this->buttons[0]->Draw(window);
-		if (this->buttons[0]->containsMouse(mouse))
+		this->myInterface[0]->Draw(window);
+		if (this->myInterface[0]->containsMouse(mouse))
 		{
-			this->buttons[0]->changeColor(Color(100,100,100));
+			this->myInterface[0]->changeColor(Color(100,100,100));
 		}
 		else
 		{
-			this->buttons[0]->changeColor(Color(130,70,65));
+			this->myInterface[0]->changeColor(Color(130,70,65));
 		}
 
-		this->buttons[3]->Draw(window);
-		if (this->buttons[3]->containsMouse(mouse))
+		this->myInterface[3]->Draw(window);
+		if (this->myInterface[3]->containsMouse(mouse))
 		{
-			this->buttons[3]->changeColor(Color(100, 100, 100));
+			this->myInterface[3]->changeColor(Color(100, 100, 100));
 		}
 		else
 		{
-			this->buttons[3]->changeColor(Color(130, 70, 65));
+			this->myInterface[3]->changeColor(Color(130, 70, 65));
 		}
 		
 		window.display();
@@ -78,16 +73,25 @@ void Game::showMenu()
 void Game::startGame()
 {
 	tgui::Gui gui(window);
-	shared_ptr<GuiButton> tab1(new GuiButton(200, 10, 50, "EAT",20));
-	shared_ptr<GuiButton> tab2(new GuiButton(300, 10, 50, "SLEEP",20));
-	shared_ptr<GuiButton> tab3(new GuiButton(400, 10, 50, "PLAY",20));
+	shared_ptr<GuiButton> tab1 = dynamic_pointer_cast<GuiButton>(myInterface[10]);
+	shared_ptr<GuiButton> tab2 = dynamic_pointer_cast<GuiButton>(myInterface[11]);
+	shared_ptr<GuiButton> tab3 = dynamic_pointer_cast<GuiButton>(myInterface[12]);
+	shared_ptr<GuiButton> tab = dynamic_pointer_cast<GuiButton>(myInterface[13]);
+	shared_ptr<GuiButton> backButton = dynamic_pointer_cast<GuiButton>(myInterface[14]);
+
+	shared_ptr<ProgBar> progBar1 = dynamic_pointer_cast<ProgBar>(myInterface[15]);
+	shared_ptr<ProgBar> progBar2 = dynamic_pointer_cast<ProgBar>(myInterface[16]);
+	shared_ptr<ProgBar> progBar3 = dynamic_pointer_cast<ProgBar>(myInterface[17]);
+	//shared_ptr<GuiButton> tab1(new GuiButton(200, 10, 50, "EAT",20));
+	//shared_ptr<GuiButton> tab2(new GuiButton(300, 10, 50, "SLEEP",20));
+	//shared_ptr<GuiButton> tab3(new GuiButton(400, 10, 50, "PLAY",20));
 	
-	shared_ptr<GuiButton> tab(new GuiButton(800,0,250,"",20));
-	shared_ptr<GuiButton> backButton(new GuiButton(900, 700, 70, "BACK",20));
-	shared_ptr<ProgBar> progBar1(new ProgBar(820, 100, 50));
-	shared_ptr<ProgBar> progBar2(new ProgBar(920, 100, 50));
-	shared_ptr<ProgBar> progBar3(new ProgBar(1020, 100, 50));
-	progBar1->setBorderColor(Color::Red);
+	//shared_ptr<GuiButton> tab(new GuiButton(800,0,250,"",20));
+	//shared_ptr<GuiButton> backButton(new GuiButton(900, 700, 70, "BACK",20));
+	//shared_ptr<ProgBar> progBar1(new ProgBar(820, 100, 50));
+	//shared_ptr<ProgBar> progBar2(new ProgBar(920, 100, 50));
+	//shared_ptr<ProgBar> progBar3(new ProgBar(1020, 100, 50));
+	//progBar1->setBorderColor(Color::Red);
 	vector<Food*> food;
 	if (typeid(*animal) == typeid(Dog))
 	{
@@ -251,7 +255,7 @@ void Game::gameOver()
 		while (window.pollEvent(event))
 		{
 			
-			if (this->buttons[2]->gGlobalBounds().contains(mouse) && event.mouseButton.button == Mouse::Left)
+			if (this->myInterface[2]->gGlobalBounds().contains(mouse) && event.mouseButton.button == Mouse::Left)
 			{
 				gameState = "exit";
 			}
@@ -263,7 +267,7 @@ void Game::gameOver()
 			{
 				gameState = "start game";
 			}
-			if (this->buttons[4]->gGlobalBounds().contains(mouse) && event.mouseButton.button == Mouse::Left)
+			if (this->myInterface[4]->gGlobalBounds().contains(mouse) && event.mouseButton.button == Mouse::Left)
 			{
 				gameState = "menu";
 			}
@@ -271,26 +275,26 @@ void Game::gameOver()
 		}
 		window.clear(Color::Magenta);
 		
-		this->buttons[1]->Draw(window);
-		this->buttons[2]->Draw(window);
-		this->buttons[2]->Draw(window);
-		this->buttons[2]->Draw(window);
-		if (this->buttons[2]->containsMouse(mouse))
+		this->myInterface[1]->Draw(window);
+		this->myInterface[2]->Draw(window);
+		this->myInterface[2]->Draw(window);
+		this->myInterface[2]->Draw(window);
+		if (this->myInterface[2]->containsMouse(mouse))
 		{
-			this->buttons[2]->changeColor(Color::Green);
+			this->myInterface[2]->changeColor(Color::Green);
 		}
 		else
 		{
-			this->buttons[2]->changeColor(Color::Red);
+			this->myInterface[2]->changeColor(Color::Red);
 		}
-		this->buttons[4]->Draw(window);
-		if (this->buttons[4]->containsMouse(mouse))
+		this->myInterface[4]->Draw(window);
+		if (this->myInterface[4]->containsMouse(mouse))
 		{
-			this->buttons[4]->changeColor(Color::Green);
+			this->myInterface[4]->changeColor(Color::Green);
 		}
 		else
 		{
-			this->buttons[4]->changeColor(Color::Red);
+			this->myInterface[4]->changeColor(Color::Red);
 		}
 		window.display();
 	}
@@ -347,11 +351,30 @@ void Game::updateGame()
 
 void Game::addTextAndScore()
 {
-	buttons.push_back(new TextButton("new game", Color(24, 34, 65, 76), 120, 420, 200));
-	buttons.push_back(new TextButton("game over", Color::Red, 60, 350, 400));
-	buttons.push_back(new TextButton("exit", Color(24,25,40), 60, 480, 470));
-	buttons.push_back(new TextButton("continue game", Color(0, 0, 0, 255), 100, 375, 350));
-	buttons.push_back(new TextButton("back", Color::Red, 80, 400, 550));
+	myInterface.push_back(shared_ptr<Interface>(new TextButton("new game", Color(24, 34, 65, 76), 120, 420, 200)));
+	myInterface.push_back(shared_ptr<Interface>(new TextButton("game over", Color::Red, 60, 350, 400)));
+	myInterface.push_back(shared_ptr<Interface>(new TextButton("exit", Color(24, 25, 40), 60, 480, 470)));
+	myInterface.push_back(shared_ptr<Interface>(new TextButton("continue game", Color(0, 0, 0, 255), 100, 375, 350)));
+	myInterface.push_back(shared_ptr<Interface>(new TextButton("back", Color::Red, 80, 400, 550)));
+	myInterface.push_back(shared_ptr<Interface>(new GuiButton(450, 400, 80, "CAT", 30)));
+	myInterface.push_back(shared_ptr<Interface>(new GuiButton(650, 400, 80, "DOG", 30)));
+	myInterface.push_back(shared_ptr<Interface>(new GuiButton(250, 500, 90, "1", 40)));
+	myInterface.push_back(shared_ptr<Interface>(new GuiButton(550, 500, 90, "2", 40)));
+	myInterface.push_back(shared_ptr<Interface>(new GuiButton(850, 500, 90, "3", 40)));
+	myInterface.push_back(shared_ptr<Interface>(new GuiButton(200, 10, 50, "EAT", 20)));
+	myInterface.push_back(shared_ptr<Interface>(new GuiButton(300, 10, 50, "SLEEP", 20)));
+	myInterface.push_back(shared_ptr<Interface>(new GuiButton(400, 10, 50, "PLAY", 20)));
+	myInterface.push_back(shared_ptr<Interface>(new GuiButton(800, 0, 250, "", 20)));
+	myInterface.push_back(shared_ptr<Interface>(new GuiButton(900, 700, 70, "BACK", 20)));
+	myInterface.push_back(shared_ptr<Interface>(new ProgBar(820, 100, 50)));
+	myInterface.push_back(shared_ptr<Interface>(new ProgBar(920, 100, 50)));
+	myInterface.push_back(shared_ptr<Interface>(new ProgBar(920, 100, 50)));
+	//buttons.push_back(new TextButton("new game", Color(24, 34, 65, 76), 120, 420, 200));
+	//buttons.push_back(new TextButton("game over", Color::Red, 60, 350, 400));
+	//buttons.push_back(new TextButton("exit", Color(24,25,40), 60, 480, 470));
+	//buttons.push_back(new TextButton("continue game", Color(0, 0, 0, 255), 100, 375, 350));
+	//buttons.push_back(new TextButton("back", Color::Red, 80, 400, 550));
+	
 }
 
 void Game::showScores()
@@ -414,10 +437,12 @@ void Game::setBackground(string bSource)
 void Game::chooseColor()
 {
 	tgui::Gui gui(window);
-	
-	shared_ptr<GuiButton> color1(new GuiButton(250, 500, 90, "1",40));
-	shared_ptr<GuiButton> color2(new GuiButton(550, 500, 90, "2",40));
-	shared_ptr<GuiButton> color3(new GuiButton(850, 500, 90, "3",40));
+	shared_ptr<GuiButton> color1 = dynamic_pointer_cast<GuiButton>(myInterface[7]);
+	shared_ptr<GuiButton> color2 = dynamic_pointer_cast<GuiButton>(myInterface[8]);
+	shared_ptr<GuiButton> color3 = dynamic_pointer_cast<GuiButton>(myInterface[9]);
+	//shared_ptr<GuiButton> color1(new GuiButton(250, 500, 90, "1",40));
+	//shared_ptr<GuiButton> color2(new GuiButton(550, 500, 90, "2",40));
+	//shared_ptr<GuiButton> color3(new GuiButton(850, 500, 90, "3",40));
 	gui.add(color1);
 	gui.add(color2);
 	gui.add(color3);
@@ -485,10 +510,10 @@ void Game::chooseColor()
 void Game::chooseAnimal()
 {
 	tgui::Gui gui(window);
-	
-	shared_ptr<GuiButton> catButton(new GuiButton(450, 400, 80, "CAT",30));
-	shared_ptr<GuiButton> dogButton(new GuiButton(650, 400, 80, "DOG",30));
+	//shared_ptr<GuiButton> catButton(new GuiButton(450, 400, 80, "CAT",30));
 	//catButton->setRenderer(theme.getRenderer("catButton"));
+	shared_ptr<GuiButton> catButton = dynamic_pointer_cast<GuiButton>(myInterface[5]);
+	shared_ptr<GuiButton> dogButton = dynamic_pointer_cast<GuiButton>(myInterface[6]);
 	gui.add(catButton);
 	gui.add(dogButton);
 	map<string, int>::iterator cur;

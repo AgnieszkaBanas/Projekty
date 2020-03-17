@@ -20,6 +20,9 @@ public:
 		
 		this->setInheritedFont("BebasNeue-Regular.ttf");
 		this->setTextSize(textSize);
-
 	};
+	FloatRect gGlobalBounds();
+	void Draw(RenderWindow &window);
+	void changeColor(Color textColor);
+	bool containsMouse(Vector2f & mouse);
 };
