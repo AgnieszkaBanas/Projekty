@@ -7,6 +7,7 @@ using namespace std;
 
 class GuiButton: public MyButton, public tgui::Button
 {
+	tgui::Button::Ptr m_button;
 	int textSize;
 public:
 	GuiButton(int pPosX, int pPosY, int pSize, string pText, int pTextSize) :MyButton(pPosX, pPosY, pSize,pText)
@@ -19,5 +20,6 @@ public:
 		
 		this->setInheritedFont("BebasNeue-Regular.ttf");
 		this->setTextSize(textSize);
+
 	};
 };

@@ -510,6 +510,7 @@ void Game::chooseAnimal()
 			animal = new Cat("cat1.png", 0, 750, 5);
 			gameState = "choose color";
 		}
+		
 		if (dogButton->mouseOnWidget(mouse3))
 		{
 			animal = new Dog("fafik6.png",0,750,2);

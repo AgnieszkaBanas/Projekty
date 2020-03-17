@@ -1,17 +1,17 @@
 #pragma once
 #include <fstream>
-#include "GraphicalObject.h"
+#include "Interface.h"
 #include <SFML/Graphics.hpp>
 using namespace std;
 using namespace sf;
 
-class MyButton: public GraphicalObject
+class MyButton: public Interface
 {
 protected:
 	Font font;
 	string buttonText;
 public:
-	MyButton(int pPosX, int pPosY, int pSize, string pText) :GraphicalObject(pPosX, pPosY, pSize)
+	MyButton(int pPosX, int pPosY, int pSize, string pText) :Interface(pPosX, pPosY, pSize)
 	{
 		if (!font.loadFromFile("BebasNeue-Regular.ttf"))
 		{
