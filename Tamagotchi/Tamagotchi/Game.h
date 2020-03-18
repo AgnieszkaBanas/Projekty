@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
-#include <memory>
+//#include <memory>
 #include "TextButton.h"
 #include "Dog.h"
 #include "AnimalPicture.h"
@@ -54,7 +54,6 @@ public:
 			//view.reset(FloatRect(0, 0, 1200, 800));
 			//view.setViewport(FloatRect(0, 0, 0.5f, 1.0f));
 			colorOfDog = { {"brown",0},{"black",4},{"grey",8} };
-			
 			//myInterface.push_back(shared_ptr<Interface>(new GuiButton(1,1,1,"",1)));
 		}
 	};

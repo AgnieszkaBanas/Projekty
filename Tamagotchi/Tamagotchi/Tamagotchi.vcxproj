@@ -128,18 +128,19 @@
     <ClCompile Include="AnimalPicture.cpp" />
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Cat.cpp" />
+    <ClCompile Include="DogFood.cpp" />
     <ClCompile Include="GuiButton.cpp" />
     <ClCompile Include="ProgBar.cpp" />
     <ClCompile Include="TextButton.cpp" />
     <ClCompile Include="Dog.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Food.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animal.h" />
     <ClInclude Include="AnimalPicture.h" />
     <ClInclude Include="Ball.h" />
+    <ClInclude Include="DogFood.h" />
     <ClInclude Include="Interface.h" />
     <ClInclude Include="MyButton.h" />
     <ClInclude Include="Cat.h" />

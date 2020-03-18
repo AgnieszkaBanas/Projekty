@@ -1,6 +1,6 @@
 #include "Cat.h"
 
-void Cat::moveAnimal(char direction, float moveSpeed)
+void Cat::moveObject(char direction, float moveSpeed)
 {
 	if (enableWalking == 1)
 	{

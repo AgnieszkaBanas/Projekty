@@ -21,7 +21,7 @@ public:
 		}
 	};
 	virtual void drawPlayer(RenderWindow &window) = 0;
-	virtual void moveAnimal(char direction, float moveSpeed) = 0;
+	virtual void moveObject(char direction, float moveSpeed) = 0;
 	virtual void eat() = 0;
 	virtual void sleep() = 0;
 	virtual void play() = 0;

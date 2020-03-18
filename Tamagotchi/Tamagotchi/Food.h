@@ -5,20 +5,18 @@
 #include "GraphicalObject.h"
 #include <TGUI/TGUI.hpp>
 
-class Food: public GraphicalObject, public Sprite
+class Food: public Sprite
 {
-	Texture texture;
+protected:
+	int posX, posY;
+	int size;
 public:
-	Food(string imgDirectory,int pPosX, int pPosY, int pSize) :GraphicalObject(pPosX, pPosY, pSize)
+	Food(int pPosX, int pPosY, int pSize)
 	{
-		if (!texture.loadFromFile(imgDirectory))
-		{
-			cerr << "Error";
-		}
-		this->setTexture(texture);
-		this->setPosition(posX, posY);
-		this->setScale(size, size);
+		posX = pPosX;
+		posY = pPosY;
+		size = pSize;
 	}
-	void Draw(RenderWindow &window);
-	void setFoodPosition(Animal*&animal);
+	virtual void Draw(RenderWindow &window)=0;
+	virtual void eatIt(Animal *& animal) = 0;
 };

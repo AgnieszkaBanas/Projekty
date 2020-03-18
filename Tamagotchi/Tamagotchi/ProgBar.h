@@ -4,8 +4,10 @@
 #include "Interface.h"
 #include <TGUI/TGUI.hpp>
 
+
 class ProgBar: public Interface, public tgui::ProgressBar, public tgui::ProgressBarRenderer
 {
+	
 public:
 	//ProgBar() {};
 	ProgBar(int pPosX, int pPosY, int pSize) :Interface(pPosX, pPosY, pSize)

@@ -15,5 +15,8 @@ void GuiButton::changeColor(Color textColor)
 
 bool GuiButton::containsMouse(Vector2f & mouse)
 {
-	return false;
+	if (this->mouseOnWidget(mouse))
+		return true;
+	else
+		return false;
 }

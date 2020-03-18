@@ -22,7 +22,7 @@ public:
 	{
 		window.draw(*this);
 	}
-	void moveAnimal(char direction, float moveSpeed);
+	void moveObject(char direction, float moveSpeed);
 	void eat();
 	void sleep();
 	void play();
