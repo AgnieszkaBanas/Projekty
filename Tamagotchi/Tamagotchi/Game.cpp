@@ -8,6 +8,7 @@
 #include "ProgBar.h"
 #include "Food.h"
 #include "DogFood.h"
+#include "CatFood.h"
 #include "AnimalPicture.h"
 #include "Interface.h"
 #include <TGUI/TGUI.hpp>
@@ -85,15 +86,15 @@ void Game::startGame()
 	shared_ptr<ProgBar> progBar1 = dynamic_pointer_cast<ProgBar>(myInterface[15]);
 	shared_ptr<ProgBar> progBar2 = dynamic_pointer_cast<ProgBar>(myInterface[16]);
 	shared_ptr<ProgBar> progBar3 = dynamic_pointer_cast<ProgBar>(myInterface[17]);
-	Food*food = new DogFood(200,200, 1);
-
-	if (typeid(*animal) == typeid(Dog))
+	
+	Food*food;
+	if (typeid(*animal) == typeid(Cat))
 	{
-		
+		food = new CatFood(1, 1,1);
 	}
 	else
 	{
-		//Food*food=new DogFood(1, 1, 3);
+		food = new DogFood(200, 200, 1);
 	}
 	//picture->create("apple.png");
 	Clock clock;
@@ -177,20 +178,25 @@ void Game::startGame()
 		}
 		if (time.asSeconds() > 0.1)
 		{
-			progBar1->incrementValue();
+			if (flag == 0)
+			{
+				progBar1->incrementValue();
 
-			progBar2->incrementValue();
+				progBar2->incrementValue();
 
-			progBar3->incrementValue();
+				progBar3->incrementValue();
+			}
 			clock.restart();
 		}
 		if(tab2->containsMouse(mouse2))
 		{
+			flag = 1;
 			animal->sleep();
 			progBar2->setValue(progBar2->getValue() - 0.1);
 		}
 		else if(tab1->containsMouse(mouse2))
 		{
+			flag = 1;
 			animal->eat();
 			food->eatIt(animal);
 			food->Draw(window);
@@ -202,6 +208,7 @@ void Game::startGame()
 		}
 		else
 		{
+			flag = 0;
 			animal->setInitialPosition();
 		}
 		window.display();

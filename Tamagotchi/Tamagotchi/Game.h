@@ -12,6 +12,7 @@ using namespace sf;
 
 class Game
 {
+	int flag = 0;
 	vector<AnimalPicture*> animalPicture;
 	Animal*animal;
 	map<string,int> colorOfDog;

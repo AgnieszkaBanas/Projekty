@@ -7,27 +7,27 @@
 using namespace std;
 using namespace sf;
 
-class DogFood:public Food
+class CatFood : public Food
 {
-	Texture dogFoodTexture;
-	vector<string> dogFoodTextures;
+	Texture catFoodTexture;
+	vector<string> catFoodTextures;
 	int counterEatingFood = 0;
 public:
-	DogFood(int pPosX, int pPosY, int pSize) :Food(pPosX, pPosY, pSize)
+	CatFood(int pPosX, int pPosY, int pSize) :Food(pPosX, pPosY, pSize)
 	{
-		for (int i = 2; i <= 8; i++)
+		for (int i = 1; i <= 1; i++)
 		{
 			ostringstream ss;
 			ss << i;
 			string str = ss.str();
-			dogFoodTextures.push_back("dogFood"+str+".png");
+			catFoodTextures.push_back("catFood" + str + ".png");
 		}
-		
-		if (!dogFoodTexture.loadFromFile(dogFoodTextures[counterEatingFood]))
+
+		if (!catFoodTexture.loadFromFile(catFoodTextures[counterEatingFood]))
 		{
 			cerr << "Error";
 		}
-		this->setTexture(dogFoodTexture);
+		this->setTexture(catFoodTexture);
 		this->setPosition(posX, posY);
 		this->setScale(size, size);
 	}
