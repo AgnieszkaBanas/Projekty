@@ -21,7 +21,19 @@ public:
 			cout << "cos poszlo nie tak :|";
 		}
 		textColor = Color::Red;
+		ostringstream ss;
+		ss << counter;
+		string str = ss.str();
+		this->setFont(font);
+		this->setFillColor(textColor);
+		this->setOutlineThickness(1);
+		this->setOutlineColor(Color(200, 200, 250, 200));
+		this->setString(str);
+		this->setCharacterSize(size);
+		this->setPosition(posX, posY);
 	};
 	void update(Dog*&dog);
 	void Draw(RenderWindow &window);
+	void setClock(int progBarValue);
+	int getCounter();
 };

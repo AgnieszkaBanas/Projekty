@@ -6,6 +6,7 @@
 #include "TextButton.h"
 #include "Dog.h"
 #include "AnimalPicture.h"
+#include "GameClock.h"
 #include "Interface.h"
 using namespace std;
 using namespace sf;
@@ -27,6 +28,7 @@ class Game
 	//vector<TextButton*> buttons;
 	Font font;
 	string gameState;
+	GameClock*gameClock = new GameClock(600, 30, 90);
 	RenderWindow window;
 public:
 	Game()
@@ -63,9 +65,9 @@ public:
 	void gameOver();
 	void updateGame();
 	void addTextAndScore();
-	void showScores();
 	void setBackground(string bSource);
 	void chooseColor();
 	void chooseAnimal();
 	void playground();
+	void doYouWantSave();
 };

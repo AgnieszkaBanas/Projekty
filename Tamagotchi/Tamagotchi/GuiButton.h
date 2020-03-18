@@ -25,4 +25,5 @@ public:
 	void Draw(RenderWindow &window);
 	void changeColor(Color textColor);
 	bool containsMouse(Vector2f & mouse);
+	void changePosition(int pPosX, int pPosY);
 };

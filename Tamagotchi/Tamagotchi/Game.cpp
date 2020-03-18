@@ -87,6 +87,8 @@ void Game::startGame()
 	shared_ptr<ProgBar> progBar1 = dynamic_pointer_cast<ProgBar>(myInterface[15]);
 	shared_ptr<ProgBar> progBar2 = dynamic_pointer_cast<ProgBar>(myInterface[16]);
 	shared_ptr<ProgBar> progBar3 = dynamic_pointer_cast<ProgBar>(myInterface[17]);
+
+	progBar3->setValue(gameClock->getCounter());
 	
 	Food*food;
 	if (typeid(*animal) == typeid(Cat))
@@ -123,7 +125,7 @@ void Game::startGame()
 		while (window.pollEvent(event))
 		{
 			if (event.type == Event::Closed)
-				gameState = "exit";
+				gameState = "save";
 			if (backButton->containsMouse(mouse2))
 				gameState = "menu";
 		}
@@ -205,6 +207,7 @@ void Game::startGame()
 		}
 		else if (tab3->containsMouse(mouse2))
 		{
+			gameClock->setClock(progBar3->getValue());
 			this->gameState = "play";
 		}
 		else
@@ -242,10 +245,6 @@ void Game::gameOver()
 			if (event.type == Event::Closed)
 			{
 				gameState = "exit";
-			}
-			if (event.type == Event::KeyPressed && event.key.code == Keyboard::Enter)
-			{
-				gameState = "start game";
 			}
 			if (this->myInterface[4]->gGlobalBounds().contains(mouse) && event.mouseButton.button == Mouse::Left)
 			{
@@ -305,10 +304,6 @@ void Game::updateGame()
 	{
 		window.close();
 	}
-	if (gameState == "best score")
-	{
-		this->showScores();
-	}
 	if (gameState == "eat")
 	{
 		this->setBackground("kitchen.jpg");
@@ -326,6 +321,10 @@ void Game::updateGame()
 	if (gameState == "play")
 	{
 		this->playground();
+	}
+	if (gameState == "save")
+	{
+		this->doYouWantSave();
 	}
 }
 
@@ -349,48 +348,10 @@ void Game::addTextAndScore()
 	myInterface.push_back(shared_ptr<Interface>(new ProgBar(820, 100, 50)));
 	myInterface.push_back(shared_ptr<Interface>(new ProgBar(920, 100, 50)));
 	myInterface.push_back(shared_ptr<Interface>(new ProgBar(1020, 100, 50)));
-}
-
-void Game::showScores()
-{
-	/*
-	this->scores[0]->getScores();
-
-	Event event;
-	while (gameState == "best score")
-	{
-		Vector2f mouse(Mouse::getPosition(window));
-		window.clear();
-		while (window.pollEvent(event))
-		{
-			if (event.type == Event::Closed)
-			{
-				gameState = "exit";
-			}
-			if (event.type == Event::KeyPressed && event.key.code == Keyboard::Enter)
-			{
-				gameState = "menu";
-			}
-			if (this->texts[4]->gGlobalBounds().contains(mouse) && event.mouseButton.button == Mouse::Left)
-			{
-				gameState = "menu";
-			}
-		}
-		window.draw(background);
-		this->scores[0]->Draw(window);
-		this->texts[4]->Draw(window);
-		if (this->texts[4]->containsMouse(mouse))
-		{
-			this->texts[4]->changeColor(Color::Green);
-		}
-		else
-		{
-			this->texts[4]->changeColor(Color::Red);
-		}
-		window.display();
-	}
-	this->updateGame();
-	*/
+	myInterface.push_back(shared_ptr<Interface>(new GuiButton(900, 600, 70, "BACK TO GAME", 20)));
+	myInterface.push_back(shared_ptr<Interface>(new TextButton("doYouWantSave", Color::Red, 80, 200, 550)));
+	myInterface.push_back(shared_ptr<Interface>(new GuiButton(450, 400, 90, "YES", 20)));
+	myInterface.push_back(shared_ptr<Interface>(new GuiButton(650, 400, 90, "NO", 20)));
 }
 
 void Game::setBackground(string bSource)
@@ -522,13 +483,18 @@ void Game::chooseAnimal()
 
 void Game::playground()
 {
+	tgui::Gui gui(window);
+	shared_ptr<GuiButton> backToGameButton = dynamic_pointer_cast<GuiButton>(myInterface[18]);
+	
+	gui.add(backToGameButton);
 	Dog*dog = dynamic_cast<Dog*>(animal);
 	dog->setPosition(200, 300);
 	dog->setInitialPosition();
 	dog->changeEnableWalking(1);
 	window.setView(window.getDefaultView());
 	Ball ball(200,200,20);
-	DynamicObject*gameClock = new GameClock(600, 30, 90);
+	Clock clock;
+	gameClock->update(dog);
 	Event event;
 	while (gameState == "play")
 	{
@@ -538,6 +504,14 @@ void Game::playground()
 			if (event.type == Event::Closed)
 			{
 				gameState = "exit";
+			}
+			if (backToGameButton->containsMouse(mouse3))
+			{
+				dog->flagPosition = 1;
+				dog->setInitialPosition();
+				dog->flagPosition = 0;
+				dog->changeEnableWalking(0);
+				gameState = "new game";
 			}
 		}
 		sleep(milliseconds(20));
@@ -562,12 +536,60 @@ void Game::playground()
 			dog->moveObject('d', 6.0);
 		}
 		window.clear();
+		if (gameClock->getCounter() == 0)
+		{
+			dog->flagPosition = 1;
+			dog->setInitialPosition();
+			dog->flagPosition = 0;
+			dog->changeEnableWalking(0);
+			gameState = "new game";
+		}
+		Time time = clock.getElapsedTime();
+		if (time.asSeconds() > 1)
+		{
+			gameClock->update(dog);
+			clock.restart();
+		}
 		ball.update(dog);
 		ball.Draw(window);
-		gameClock->update(dog);
+		
+		gui.draw();
 		gameClock->Draw(window);
 		dog->drawPlayer(window);
 		window.display();
 	}
+	this->updateGame();
+}
+
+void Game::doYouWantSave()
+{
+	tgui::Gui gui(window);
+	shared_ptr<GuiButton> buttonYes = dynamic_pointer_cast<GuiButton>(myInterface[20]);
+	shared_ptr<GuiButton> buttonNo = dynamic_pointer_cast<GuiButton>(myInterface[21]);
+	gui.add(buttonYes);
+	gui.add(buttonNo);
+	Event event;
+	while (gameState == "save")
+	{
+		Vector2f mouse(Mouse::getPosition(window));
+
+		while (window.pollEvent(event))
+		{
+			if (event.type == Event::Closed)
+			{
+				gameState = "exit";
+			}
+			if (buttonNo->containsMouse(mouse))
+			{
+				gameState = "exit";
+			}
+		}
+		window.clear(Color::Magenta);
+
+		this->myInterface[19]->Draw(window);
+		gui.draw();
+		window.display();
+	}
+
 	this->updateGame();
 }

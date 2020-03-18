@@ -62,6 +62,10 @@ void Dog::play()
 void Dog::setInitialPosition()
 {
 	this->setTextureRect(IntRect((colorIterator) * 86, 86, 86, 86));
+	if (this->flagPosition == 1)
+	{
+		this->setPosition(posX, posY);
+	}
 }
 
 void Dog::setColorIterator(int colorIterator)

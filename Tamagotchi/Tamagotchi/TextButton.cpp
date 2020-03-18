@@ -47,6 +47,14 @@ void TextButton::Draw(RenderWindow & window)
 		text.setPosition(posX, posY);
 		text.setString("Back To Menu");
 	}
+	if (buttonText == "doYouWantSave")
+	{
+		text.setFont(font);
+		text.setFillColor(textColor);
+		text.setCharacterSize(size);
+		text.setPosition(posX, posY);
+		text.setString("Do you want save the game?");
+	}
 	window.draw(text);
 }
 

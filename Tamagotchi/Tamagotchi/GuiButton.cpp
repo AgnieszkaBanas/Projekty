@@ -20,3 +20,8 @@ bool GuiButton::containsMouse(Vector2f & mouse)
 	else
 		return false;
 }
+
+void GuiButton::changePosition(int pPosX, int pPosY)
+{
+	this->setPosition(pPosX, pPosY);
+}

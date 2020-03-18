@@ -11,8 +11,10 @@ class Dog : public Animal
 	int counterWalking = 0;
 	int counterEating = 0;
 	int counterSleeping = 0;
+	
 public:
 	Dog() {};
+	int flagPosition = 0;
 	Dog(string imgDirectory, int pPosX, int pPosY,int pSize):Animal(imgDirectory,pPosX,pPosY,pSize)
 	{
 		this->setTexture(animalTexture);
