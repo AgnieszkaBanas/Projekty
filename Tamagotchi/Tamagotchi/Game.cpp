@@ -9,6 +9,7 @@
 #include "Food.h"
 #include "DogFood.h"
 #include "CatFood.h"
+#include "GameClock.h"
 #include "AnimalPicture.h"
 #include "Interface.h"
 #include <TGUI/TGUI.hpp>
@@ -527,7 +528,7 @@ void Game::playground()
 	dog->changeEnableWalking(1);
 	window.setView(window.getDefaultView());
 	Ball ball(200,200,20);
-
+	DynamicObject*gameClock = new GameClock(600, 30, 90);
 	Event event;
 	while (gameState == "play")
 	{
@@ -563,6 +564,8 @@ void Game::playground()
 		window.clear();
 		ball.update(dog);
 		ball.Draw(window);
+		gameClock->update(dog);
+		gameClock->Draw(window);
 		dog->drawPlayer(window);
 		window.display();
 	}
