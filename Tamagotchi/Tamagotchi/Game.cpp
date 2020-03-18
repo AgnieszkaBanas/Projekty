@@ -678,12 +678,20 @@ void Game::continueGame()
 				animal->setColorIterator(data.color);
 				gameState = "new game";
 			}
+			if (catButton->containsMouse(mouse3))
+			{
+				repository = new CatRepository();
+				Data data;
+				data = repository->readData();
+				animal = new Cat("cat1.png", 0, 750, 5);;
+				progBar1->setValue(data.pBV1);
+				progBar2->setValue(data.pBV2);
+				progBar3->setValue(data.pBV3);
+				animal->setColorIterator(data.color);
+				gameState = "new game";
+			}
 		}
 		window.clear();
-
-		if (catButton->containsMouse(mouse3))
-		{
-		}
 
 		window.draw(background);
 		gui.draw();
