@@ -646,4 +646,48 @@ void Game::savingGame()
 
 void Game::continueGame()
 {
+	tgui::Gui gui(window);
+
+	shared_ptr<GuiButton> catButton = dynamic_pointer_cast<GuiButton>(myInterface[5]);
+	shared_ptr<GuiButton> dogButton = dynamic_pointer_cast<GuiButton>(myInterface[6]);
+	shared_ptr<ProgBar> progBar1 = dynamic_pointer_cast<ProgBar>(myInterface[15]);
+	shared_ptr<ProgBar> progBar2 = dynamic_pointer_cast<ProgBar>(myInterface[16]);
+	shared_ptr<ProgBar> progBar3 = dynamic_pointer_cast<ProgBar>(myInterface[17]);
+	gui.add(catButton);
+	gui.add(dogButton);
+	map<string, int>::iterator cur;
+	Event event;
+	while (gameState == "continue game")
+	{
+		Vector2f mouse3(Mouse::getPosition(window));
+		while (window.pollEvent(event))
+		{
+			if (event.type == Event::Closed)
+			{
+				gameState = "exit";
+			}
+			if (dogButton->containsMouse(mouse3))
+			{
+				repository = new DogRepository();
+				Data data;
+				data = repository->readData();
+				animal = new Dog("fafik6.png", 0, 750, 2);
+				progBar1->setValue(data.pBV1);
+				progBar2->setValue(data.pBV2);
+				progBar3->setValue(data.pBV3);
+				animal->setColorIterator(data.color);
+				gameState = "new game";
+			}
+		}
+		window.clear();
+
+		if (catButton->containsMouse(mouse3))
+		{
+		}
+
+		window.draw(background);
+		gui.draw();
+		window.display();
+	}
+	this->updateGame();
 }
