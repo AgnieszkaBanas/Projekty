@@ -27,4 +27,5 @@ public:
 	virtual void play() = 0;
 	virtual void setInitialPosition() = 0;
 	virtual void setColorIterator(int colorIterator) = 0;
+	virtual int getColorIterator() = 0;
 };

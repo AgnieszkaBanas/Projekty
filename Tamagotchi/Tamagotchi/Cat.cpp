@@ -37,6 +37,11 @@ void Cat::setColorIterator(int colorIterator)
 	this->colorIterator = colorIterator;
 }
 
+int Cat::getColorIterator()
+{
+	return this->colorIterator;
+}
+
 void Cat::eat()
 {
 	this->setTextureRect(IntRect((counterEating * 32) + (32 * colorIterator), 32 * 4, 32, 32));

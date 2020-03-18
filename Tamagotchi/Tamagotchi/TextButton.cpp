@@ -55,6 +55,14 @@ void TextButton::Draw(RenderWindow & window)
 		text.setPosition(posX, posY);
 		text.setString("Do you want save the game?");
 	}
+	if (buttonText == "savedGame")
+	{
+		text.setFont(font);
+		text.setFillColor(textColor);
+		text.setCharacterSize(size);
+		text.setPosition(posX, posY);
+		text.setString("YOU SAVED THE GAME!");
+	}
 	window.draw(text);
 }
 

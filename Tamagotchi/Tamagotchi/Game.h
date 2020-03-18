@@ -72,4 +72,6 @@ public:
 	void chooseAnimal();
 	void playground();
 	void doYouWantSave();
+	void savingGame();
+	void continueGame();
 };

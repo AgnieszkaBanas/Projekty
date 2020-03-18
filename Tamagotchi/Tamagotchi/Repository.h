@@ -14,6 +14,6 @@ class Repository
 {
 	Data data;
 public:
-	virtual void saveData() = 0;
+	virtual void saveData(int pPBV1, int pPBV2, int pPBV3,int pColor) = 0;
 	virtual Data readData() = 0;
 };

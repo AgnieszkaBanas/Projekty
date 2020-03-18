@@ -6,7 +6,7 @@ using namespace std;
 using namespace sf;
 
 
-class DogRepository: public Repository
+class CatRepository : public Repository
 {
 public:
 	void saveData(int pPBV1, int pPBV2, int pPBV3, int pColor);

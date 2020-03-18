@@ -11,6 +11,8 @@
 #include "CatFood.h"
 #include "GameClock.h"
 #include "AnimalPicture.h"
+#include "DogRepository.h"
+#include "CatRepository.h"
 #include "Interface.h"
 #include <TGUI/TGUI.hpp>
 #include <TGUI/Widgets/ClickableWidget.hpp>
@@ -326,6 +328,14 @@ void Game::updateGame()
 	{
 		this->doYouWantSave();
 	}
+	if (gameState == "saving game")
+	{
+		this->savingGame();
+	}
+	if (gameState == "continue game")
+	{
+		this->continueGame();
+	}
 }
 
 void Game::addTextAndScore()
@@ -352,6 +362,7 @@ void Game::addTextAndScore()
 	myInterface.push_back(shared_ptr<Interface>(new TextButton("doYouWantSave", Color::Red, 80, 200, 550)));
 	myInterface.push_back(shared_ptr<Interface>(new GuiButton(450, 400, 90, "YES", 20)));
 	myInterface.push_back(shared_ptr<Interface>(new GuiButton(650, 400, 90, "NO", 20)));
+	myInterface.push_back(shared_ptr<Interface>(new TextButton("savedGame", Color::Red, 80, 200, 550)));
 }
 
 void Game::setBackground(string bSource)
@@ -583,6 +594,10 @@ void Game::doYouWantSave()
 			{
 				gameState = "exit";
 			}
+			if (buttonYes->containsMouse(mouse))
+			{
+				gameState = "saving game";
+			}
 		}
 		window.clear(Color::Magenta);
 
@@ -592,4 +607,43 @@ void Game::doYouWantSave()
 	}
 
 	this->updateGame();
+}
+
+void Game::savingGame()
+{
+	shared_ptr<ProgBar> progBar1 = dynamic_pointer_cast<ProgBar>(myInterface[15]);
+	shared_ptr<ProgBar> progBar2 = dynamic_pointer_cast<ProgBar>(myInterface[16]);
+	shared_ptr<ProgBar> progBar3 = dynamic_pointer_cast<ProgBar>(myInterface[17]);
+
+	Event event;
+	if (typeid(*animal) == typeid(Dog))
+	{
+		repository = new DogRepository();
+	}
+	else
+	{
+		repository = new CatRepository();
+	}
+	repository->saveData(progBar1->getValue(), progBar2->getValue(), progBar3->getValue(),animal->getColorIterator());
+	while (gameState == "saving game")
+	{
+		Vector2f mouse(Mouse::getPosition(window));
+
+		while (window.pollEvent(event))
+		{
+			if (event.type == Event::Closed)
+			{
+				gameState = "exit";
+			}
+		}
+		window.clear(Color::Magenta);
+		this->myInterface[22]->Draw(window);
+		window.display();
+	}
+
+	this->updateGame();
+}
+
+void Game::continueGame()
+{
 }

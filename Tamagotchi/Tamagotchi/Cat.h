@@ -28,4 +28,5 @@ public:
 	void play();
 	void setInitialPosition();
 	void setColorIterator(int colorIterator);
+	int getColorIterator();
 };

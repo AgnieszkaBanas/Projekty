@@ -33,4 +33,5 @@ public:
 	void setInitialPosition();
 	void setColorIterator(int colorIterator);
 	void changeEnableWalking(int e);
+	int getColorIterator();
 };

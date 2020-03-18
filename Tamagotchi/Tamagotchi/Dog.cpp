@@ -77,3 +77,8 @@ void Dog::changeEnableWalking(int e)
 {
 	this->enableWalking = e;
 }
+
+int Dog::getColorIterator()
+{
+	return this->colorIterator;
+}
