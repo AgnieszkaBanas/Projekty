@@ -130,6 +130,7 @@
     <ClCompile Include="Cat.cpp" />
     <ClCompile Include="CatFood.cpp" />
     <ClCompile Include="DogFood.cpp" />
+    <ClCompile Include="DogRepository.cpp" />
     <ClCompile Include="GameClock.cpp" />
     <ClCompile Include="GuiButton.cpp" />
     <ClCompile Include="ProgBar.cpp" />
@@ -144,11 +145,13 @@
     <ClInclude Include="Ball.h" />
     <ClInclude Include="CatFood.h" />
     <ClInclude Include="DogFood.h" />
+    <ClInclude Include="DogRepository.h" />
     <ClInclude Include="DynamicObject.h" />
     <ClInclude Include="GameClock.h" />
     <ClInclude Include="Interface.h" />
     <ClInclude Include="MyButton.h" />
     <ClInclude Include="Cat.h" />
+    <ClInclude Include="Repository.h" />
     <ClInclude Include="TextButton.h" />
     <ClInclude Include="Dog.h" />
     <ClInclude Include="Game.h" />

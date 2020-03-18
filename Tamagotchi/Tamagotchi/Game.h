@@ -4,6 +4,7 @@
 #include <vector>
 //#include <memory>
 #include "TextButton.h"
+#include "Repository.h"
 #include "Dog.h"
 #include "AnimalPicture.h"
 #include "GameClock.h"
@@ -13,6 +14,7 @@ using namespace sf;
 
 class Game
 {
+	Repository*repository;
 	int flag = 0;
 	vector<AnimalPicture*> animalPicture;
 	Animal*animal;
