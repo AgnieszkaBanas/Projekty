@@ -9,6 +9,7 @@
 #include "Food.h"
 #include "DogFood.h"
 #include "CatFood.h"
+#include "Box.h"
 #include "GameClock.h"
 #include "AnimalPicture.h"
 #include "DogRepository.h"
@@ -497,13 +498,19 @@ void Game::playground()
 	shared_ptr<GuiButton> backToGameButton = dynamic_pointer_cast<GuiButton>(myInterface[18]);
 	
 	gui.add(backToGameButton);
-
-	//Dog*dog = dynamic_cast<Dog*>(animal);
+	if (typeid(*animal) == typeid(Dog))
+	{
+		dynamicObject = new Ball(200, 200, 20);
+	}
+	else
+	{
+		dynamicObject = new Box(200, 200, 20);
+	}
 	animal->setPosition(200, 300);
 	animal->setInitialPosition();
 	animal->changeEnableWalking(1);
 	window.setView(window.getDefaultView());
-	Ball ball(200,200,20);
+	
 	Clock clock;
 	gameClock->update(animal);
 	Event event;
@@ -543,8 +550,8 @@ void Game::playground()
 			clock.restart();
 		}
 		animal->play();
-		ball.update(animal);
-		ball.Draw(window);
+		dynamicObject->update(animal);
+		dynamicObject->Draw(window);
 		
 		gui.draw();
 		gameClock->Draw(window);

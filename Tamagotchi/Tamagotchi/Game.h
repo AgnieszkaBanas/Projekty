@@ -31,6 +31,7 @@ class Game
 	//vector<TextButton*> buttons;
 	Font font;
 	string gameState;
+	DynamicObject*dynamicObject;
 	GameClock*gameClock = new GameClock(600, 30, 90);
 	RenderWindow window;
 public:
