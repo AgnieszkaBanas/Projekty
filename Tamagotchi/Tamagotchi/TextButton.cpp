@@ -19,7 +19,7 @@ void TextButton::Draw(RenderWindow & window)
 		text.setFillColor(textColor);
 		text.setCharacterSize(size);
 		text.setPosition(posX, posY);
-		text.setString("GAME OVER! Your Score:");
+		text.setString("GAME OVER!");
 	}
 	if (buttonText == "exit")
 	{

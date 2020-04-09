@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
+#include <list>
 //#include <memory>
 #include "TextButton.h"
 #include "Repository.h"
@@ -16,7 +17,7 @@ class Game
 {
 	Repository*repository;
 	int flag = 0;
-	vector<AnimalPicture*> animalPicture;
+	list<AnimalPicture> animalPicture;
 	Animal*animal;
 	map<string,int> colorOfDog;
 	View view;

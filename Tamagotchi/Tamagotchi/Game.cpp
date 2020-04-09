@@ -169,14 +169,14 @@ void Game::startGame()
 		background.setTexture(backgroundTexture);
 		window.setView(view);
 		window.draw(background);
-		//floor.drawFloor(window);
+		
 		animal->drawPlayer(window);
-		//food->Draw(window);
+		
 		gui.draw();
 		
 		Time time = clock.getElapsedTime();
 		Time timeFood = clockFood.getElapsedTime();
-		//cout << time.asSeconds() << " ";
+		
 		if (progBar1->getValue() == 100)
 		{
 			gameState = "game over";
@@ -224,14 +224,6 @@ void Game::startGame()
 
 void Game::gameOver()
 {
-	/*
-	fstream plik("scores.txt", ios::out | ios::app);
-	if (plik.good() == true)
-	{
-		//plik << scores[1]->getScore() << " ";
-		plik.close();
-	}
-	*/
 	Event event;
 	while (gameState == "game over")
 	{
@@ -341,7 +333,7 @@ void Game::updateGame()
 void Game::addTextAndScore()
 {
 	myInterface.push_back(shared_ptr<Interface>(new TextButton("new game", Color(24, 34, 65, 76), 120, 420, 200)));
-	myInterface.push_back(shared_ptr<Interface>(new TextButton("game over", Color::Red, 60, 350, 400)));
+	myInterface.push_back(shared_ptr<Interface>(new TextButton("game over", Color::Red, 90, 400, 300)));
 	myInterface.push_back(shared_ptr<Interface>(new TextButton("exit", Color(24, 25, 40), 60, 480, 470)));
 	myInterface.push_back(shared_ptr<Interface>(new TextButton("continue game", Color(0, 0, 0, 255), 100, 375, 350)));
 	myInterface.push_back(shared_ptr<Interface>(new TextButton("back", Color::Red, 80, 400, 550)));
@@ -394,15 +386,15 @@ void Game::chooseColor()
 
 	if (typeid(*animal) == typeid(Dog))
 	{
-		animalPicture.push_back(new AnimalPicture(0, "fafik6.png", 2.5, 220, 300, 86,1));
-		animalPicture.push_back(new AnimalPicture(4, "fafik6.png", 2.5, 520, 300, 86,1));
-		animalPicture.push_back(new AnimalPicture(8, "fafik6.png", 2.5, 820, 300, 86,1));
+		animalPicture.push_back(AnimalPicture(0, "fafik6.png", 2.5, 220, 300, 86,1));
+		animalPicture.push_back(AnimalPicture(4, "fafik6.png", 2.5, 520, 300, 86,1));
+		animalPicture.push_back(AnimalPicture(8, "fafik6.png", 2.5, 820, 300, 86,1));
 	}
 	else
 	{
-		animalPicture.push_back(new AnimalPicture(0, "cat1.png", 6, 220, 300, 32,0));
-		animalPicture.push_back(new AnimalPicture(4, "cat1.png", 6, 520, 300, 32,0));
-		animalPicture.push_back(new AnimalPicture(8, "cat1.png", 6, 820, 300, 32,0));
+		animalPicture.push_back(AnimalPicture(0, "cat1.png", 6, 220, 300, 32,0));
+		animalPicture.push_back(AnimalPicture(4, "cat1.png", 6, 520, 300, 32,0));
+		animalPicture.push_back(AnimalPicture(8, "cat1.png", 6, 820, 300, 32,0));
 	}
 
 	map<string,int>::iterator cur;
@@ -443,10 +435,17 @@ void Game::chooseColor()
 		}
 		window.draw(background);
 		gui.draw();
+		list<AnimalPicture> ::iterator it;
+		for (it = animalPicture.begin(); it != animalPicture.end(); ++it)
+		{
+			(*it).Draw(window);
+		}
+		/*
 		for (int i = 0; i < animalPicture.size(); i++)
 		{
 			animalPicture[i]->Draw(window);
 		}
+		*/
 		window.display();
 	}
 	this->updateGame();

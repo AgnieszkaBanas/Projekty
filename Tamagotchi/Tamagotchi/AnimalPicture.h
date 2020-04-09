@@ -27,7 +27,7 @@ public:
 		{
 			cout << "Nie mozna zaladowac obrazka." << endl;
 		}
-		this->setTexture(texAnimals);
+		
 		this->setPosition(posX,posY);
 		this->setScale(size,size);
 		this->colorIterator = pColorIterator;
