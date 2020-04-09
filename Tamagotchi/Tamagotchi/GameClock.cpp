@@ -1,6 +1,6 @@
 #include "GameClock.h"
 
-void GameClock::update(Dog *& dog)
+void GameClock::update(Animal*&animal)
 {
 	ostringstream ss;
 	ss << counter;

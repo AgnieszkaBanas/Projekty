@@ -2,7 +2,7 @@
 #include <iostream>
 #include <ctime>
 #include <SFML/Graphics.hpp>
-#include"Dog.h"
+#include"Animal.h"
 #include "DynamicObject.h"
 using namespace sf;
 using namespace std;
@@ -18,6 +18,6 @@ public:
 		this->setFillColor(Color::Red);
 		this->setPosition(posX,posY);
 	}
-	void update(Dog*&dog);
+	void update(Animal*&animal);
 	void Draw(RenderWindow &window);
 };

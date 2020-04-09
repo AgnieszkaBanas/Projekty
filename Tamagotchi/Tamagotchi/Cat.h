@@ -29,4 +29,5 @@ public:
 	void setInitialPosition();
 	void setColorIterator(int colorIterator);
 	int getColorIterator();
+	void changeEnableWalking(int e);
 };

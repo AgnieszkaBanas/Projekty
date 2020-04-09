@@ -42,6 +42,11 @@ int Cat::getColorIterator()
 	return this->colorIterator;
 }
 
+void Cat::changeEnableWalking(int e)
+{
+	this->enableWalking = e;
+}
+
 void Cat::eat()
 {
 	this->setTextureRect(IntRect((counterEating * 32) + (32 * colorIterator), 32 * 4, 32, 32));
@@ -59,6 +64,25 @@ void Cat::sleep()
 
 void Cat::play()
 {
+	if (Keyboard::isKeyPressed(Keyboard::Left))
+	{
+		this->moveObject('l', 6.0);
+	}
+
+	if (Keyboard::isKeyPressed(Keyboard::Right))
+	{
+		this->moveObject('r', 6.0);
+	}
+
+	if (Keyboard::isKeyPressed(Keyboard::Up))
+	{
+		this->moveObject('u', 6.0);
+	}
+
+	if (Keyboard::isKeyPressed(Keyboard::Down))
+	{
+		this->moveObject('d', 6.0);
+	}
 }
 
 void Cat::setInitialPosition()

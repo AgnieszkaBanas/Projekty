@@ -13,6 +13,7 @@ protected:
 	int colorIterator;
 public:
 	Animal() {};
+	int flagPosition = 0;
 	Animal(string imgDirectory,int pPosX, int pPosY,int pSize) :GraphicalObject(pPosX,pPosY,pSize)
 	{
 		if (!animalTexture.loadFromFile(imgDirectory))
@@ -28,4 +29,5 @@ public:
 	virtual void setInitialPosition() = 0;
 	virtual void setColorIterator(int colorIterator) = 0;
 	virtual int getColorIterator() = 0;
+	virtual void changeEnableWalking(int e) = 0;
 };

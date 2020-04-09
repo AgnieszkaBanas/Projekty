@@ -101,7 +101,7 @@ void Game::startGame()
 	{
 		food = new DogFood(200, 200, 1);
 	}
-	//picture->create("apple.png");
+	
 	Clock clock;
 	Clock clockFood;
 	gui.add(tab1);
@@ -497,14 +497,15 @@ void Game::playground()
 	shared_ptr<GuiButton> backToGameButton = dynamic_pointer_cast<GuiButton>(myInterface[18]);
 	
 	gui.add(backToGameButton);
-	Dog*dog = dynamic_cast<Dog*>(animal);
-	dog->setPosition(200, 300);
-	dog->setInitialPosition();
-	dog->changeEnableWalking(1);
+
+	//Dog*dog = dynamic_cast<Dog*>(animal);
+	animal->setPosition(200, 300);
+	animal->setInitialPosition();
+	animal->changeEnableWalking(1);
 	window.setView(window.getDefaultView());
 	Ball ball(200,200,20);
 	Clock clock;
-	gameClock->update(dog);
+	gameClock->update(animal);
 	Event event;
 	while (gameState == "play")
 	{
@@ -517,55 +518,37 @@ void Game::playground()
 			}
 			if (backToGameButton->containsMouse(mouse3))
 			{
-				dog->flagPosition = 1;
-				dog->setInitialPosition();
-				dog->flagPosition = 0;
-				dog->changeEnableWalking(0);
+				animal->flagPosition = 1;
+				animal->setInitialPosition();
+				animal->flagPosition = 0;
+				animal->changeEnableWalking(0);
 				gameState = "new game";
 			}
 		}
 		sleep(milliseconds(20));
 		
-		if (Keyboard::isKeyPressed(Keyboard::Left))
-		{
-			dog->moveObject('l', 6.0);
-		}
-
-		if (Keyboard::isKeyPressed(Keyboard::Right))
-		{
-			dog->moveObject('r', 6.0);
-		}
-
-		if (Keyboard::isKeyPressed(Keyboard::Up))
-		{
-			dog->moveObject('u', 6.0);
-		}
-
-		if (Keyboard::isKeyPressed(Keyboard::Down))
-		{
-			dog->moveObject('d', 6.0);
-		}
 		window.clear();
 		if (gameClock->getCounter() == 0)
 		{
-			dog->flagPosition = 1;
-			dog->setInitialPosition();
-			dog->flagPosition = 0;
-			dog->changeEnableWalking(0);
+			animal->flagPosition = 1;
+			animal->setInitialPosition();
+			animal->flagPosition = 0;
+			animal->changeEnableWalking(0);
 			gameState = "new game";
 		}
 		Time time = clock.getElapsedTime();
 		if (time.asSeconds() > 1)
 		{
-			gameClock->update(dog);
+			gameClock->update(animal);
 			clock.restart();
 		}
-		ball.update(dog);
+		animal->play();
+		ball.update(animal);
 		ball.Draw(window);
 		
 		gui.draw();
 		gameClock->Draw(window);
-		dog->drawPlayer(window);
+		animal->drawPlayer(window);
 		window.display();
 	}
 	this->updateGame();

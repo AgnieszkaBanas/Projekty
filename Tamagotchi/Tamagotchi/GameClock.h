@@ -4,7 +4,7 @@
 #include <vector>
 #include <SFML/Graphics.hpp>
 #include "DynamicObject.h"
-#include "Dog.h"
+#include "Animal.h"
 using namespace std;
 using namespace sf;
 
@@ -32,7 +32,7 @@ public:
 		this->setCharacterSize(size);
 		this->setPosition(posX, posY);
 	};
-	void update(Dog*&dog);
+	void update(Animal*&animal);
 	void Draw(RenderWindow &window);
 	void setClock(int progBarValue);
 	int getCounter();
