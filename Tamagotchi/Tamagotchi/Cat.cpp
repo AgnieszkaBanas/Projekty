@@ -87,7 +87,7 @@ void Cat::play()
 
 void Cat::setInitialPosition()
 {
-	this->setTextureRect(IntRect((colorIterator) * 32, 0, 32, 32));
+	this->setTextureRect(IntRect((colorIterator) * 32+32, 0, 32, 32));
 	if (this->flagPosition == 1)
 	{
 		this->setPosition(posX, posY);

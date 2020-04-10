@@ -186,7 +186,7 @@ void Game::startGame()
 		Time time = clock.getElapsedTime();
 		Time timeFood = clockFood.getElapsedTime();
 		
-		if (progBar1->getValue() == 100)
+		if ((progBar1->getValue() == 100)||(progBar2->getValue() == 100)||(progBar3->getValue() == 100))
 		{
 			gameState = "game over";
 		}
@@ -234,6 +234,7 @@ void Game::startGame()
 void Game::gameOver()
 {
 	Event event;
+	window.setView(window.getDefaultView());
 	while (gameState == "game over")
 	{
 		Vector2f mouse(Mouse::getPosition(window));
@@ -295,7 +296,7 @@ void Game::updateGame()
 	}
 	if (gameState == "new game")
 	{
-		this->setBackground("city2.jpg");
+		this->setBackground("bl3.jpg");
 		this->startGame();	
 	}
 	if (gameState == "game over")
@@ -323,6 +324,7 @@ void Game::updateGame()
 	}
 	if (gameState == "play")
 	{
+		this->setBackground("grass.jpg");
 		this->playground();
 	}
 	if (gameState == "save")
@@ -342,8 +344,8 @@ void Game::updateGame()
 void Game::addTextAndScore()
 {
 	myInterface.push_back(shared_ptr<Interface>(new TextButton("new game", Color(24, 34, 65, 76), 120, 420, 200)));
-	myInterface.push_back(shared_ptr<Interface>(new TextButton("game over", Color::Red, 90, 400, 300)));
-	myInterface.push_back(shared_ptr<Interface>(new TextButton("exit", Color(24, 25, 40), 60, 480, 470)));
+	myInterface.push_back(shared_ptr<Interface>(new TextButton("game over", Color::Red, 110, 400, 200)));
+	myInterface.push_back(shared_ptr<Interface>(new TextButton("exit", Color(24, 25, 40), 90, 480, 300)));
 	myInterface.push_back(shared_ptr<Interface>(new TextButton("continue game", Color(0, 0, 0, 255), 100, 375, 350)));
 	myInterface.push_back(shared_ptr<Interface>(new TextButton("back", Color::Red, 80, 400, 550)));
 	myInterface.push_back(shared_ptr<Interface>(new GuiButton(450, 400, 80, "CAT", 30)));
@@ -360,9 +362,9 @@ void Game::addTextAndScore()
 	myInterface.push_back(shared_ptr<Interface>(new ProgBar(920, 100, 50)));
 	myInterface.push_back(shared_ptr<Interface>(new ProgBar(1020, 100, 50)));
 	myInterface.push_back(shared_ptr<Interface>(new GuiButton(900, 600, 70, "BACK TO GAME", 20)));
-	myInterface.push_back(shared_ptr<Interface>(new TextButton("doYouWantSave", Color::Red, 80, 200, 550)));
-	myInterface.push_back(shared_ptr<Interface>(new GuiButton(450, 400, 90, "YES", 40)));
-	myInterface.push_back(shared_ptr<Interface>(new GuiButton(650, 400, 90, "NO", 40)));
+	myInterface.push_back(shared_ptr<Interface>(new TextButton("doYouWantSave", Color::Red, 80, 220, 250)));
+	myInterface.push_back(shared_ptr<Interface>(new GuiButton(440, 400, 90, "YES", 40)));
+	myInterface.push_back(shared_ptr<Interface>(new GuiButton(640, 400, 90, "NO", 40)));
 	myInterface.push_back(shared_ptr<Interface>(new TextButton("savedGame", Color::Red, 80, 200, 550)));
 	myInterface.push_back(shared_ptr<Interface>(new GuiButton(810, 40, 30, "HUNGRY", 20)));
 	myInterface.push_back(shared_ptr<Interface>(new GuiButton(910, 40, 30, "TIRED", 20)));
@@ -487,13 +489,13 @@ void Game::chooseAnimal()
 		
 		if (catButton->containsMouse(mouse3))
 		{
-			animal = new Cat("cat1.png", 0, 750, 5);
+			animal = new Cat("cat1.png", 0, 785, 5);
 			gameState = "choose color";
 		}
 		
 		if (dogButton->containsMouse(mouse3))
 		{
-			animal = new Dog("fafik6.png",0,750,2);
+			animal = new Dog("fafik6.png",0,780,2);
 			gameState = "choose color";
 		}
 		window.draw(background);
@@ -549,6 +551,7 @@ void Game::playground()
 		sleep(milliseconds(20));
 		
 		window.clear();
+		window.draw(background);
 		if (gameClock->getCounter() == 0)
 		{
 			animal->flagPosition = 1;
@@ -569,6 +572,7 @@ void Game::playground()
 			dynamicObjects[i]->update(animal, window);
 			dynamicObjects[i]->Draw(window);
 		}
+		
 		gui.draw();
 		gameClock->Draw(window);
 		animal->drawPlayer(window);
@@ -584,6 +588,8 @@ void Game::doYouWantSave()
 	shared_ptr<GuiButton> buttonNo = dynamic_pointer_cast<GuiButton>(myInterface[21]);
 	gui.add(buttonYes);
 	gui.add(buttonNo);
+	window.setView(window.getDefaultView());
+
 	Event event;
 	while (gameState == "save")
 	{
@@ -676,7 +682,7 @@ void Game::continueGame()
 				repository = new DogRepository();
 				Data data;
 				data = repository->readData();
-				animal = new Dog("fafik6.png", 0, 750, 2);
+				animal = new Dog("fafik6.png", 0, 780, 2);
 				progBar1->setValue(data.pBV1);
 				progBar2->setValue(data.pBV2);
 				progBar3->setValue(data.pBV3);
@@ -688,11 +694,11 @@ void Game::continueGame()
 				repository = new CatRepository();
 				Data data;
 				data = repository->readData();
-				animal = new Cat("cat1.png", 0, 750, 5);;
+				animal = new Cat("cat1.png", 0, 785, 5);
+				animal->setColorIterator(data.color);
 				progBar1->setValue(data.pBV1);
 				progBar2->setValue(data.pBV2);
 				progBar3->setValue(data.pBV3);
-				animal->setColorIterator(data.color);
 				gameState = "new game";
 			}
 		}
