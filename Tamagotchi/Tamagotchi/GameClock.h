@@ -32,7 +32,7 @@ public:
 		this->setCharacterSize(size);
 		this->setPosition(posX, posY);
 	};
-	void update(Animal*&animal);
+	void update(Animal*&animal, RenderWindow &window);
 	void Draw(RenderWindow &window);
 	void setClock(int progBarValue);
 	int getCounter();

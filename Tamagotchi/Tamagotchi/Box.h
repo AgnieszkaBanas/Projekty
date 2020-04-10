@@ -16,6 +16,6 @@ public:
 		this->setFillColor(Color::Red);
 		this->setSize(Vector2f(size,size));
 	}
-	void update(Animal*&animal);
+	void update(Animal*&animal, RenderWindow &window);
 	void Draw(RenderWindow &window);
 };

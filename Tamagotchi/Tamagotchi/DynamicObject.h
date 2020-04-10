@@ -12,6 +12,6 @@ class DynamicObject :public GraphicalObject
 {
 public:
 	DynamicObject(int pPosX, int pPosY, int pSize) :GraphicalObject(pPosX, pPosY, pSize) {};
-	virtual void update(Animal*&animal)=0;
+	virtual void update(Animal*&animal, RenderWindow &window)=0;
 	virtual void Draw(RenderWindow &window)=0;
 };

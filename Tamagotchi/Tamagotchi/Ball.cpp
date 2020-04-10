@@ -1,6 +1,6 @@
 #include "Ball.h"
 
-void Ball::update(Animal*&animal)
+void Ball::update(Animal*&animal, RenderWindow &window)
 {
 	this->move(this->velocity);
 	if ((this->getPosition().x - this->size <= 0)||(((this->getPosition().x + this->size <=animal->getPosition().x+172)&&(this->getPosition().x - this->size > animal->getPosition().x))&&(this->getPosition().y> animal->getPosition().y&&this->getPosition().y <= animal->getPosition().y+172)))

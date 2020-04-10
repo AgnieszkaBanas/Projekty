@@ -85,6 +85,11 @@ void Game::startGame()
 	shared_ptr<GuiButton> tab2 = dynamic_pointer_cast<GuiButton>(myInterface[11]);
 	shared_ptr<GuiButton> tab3 = dynamic_pointer_cast<GuiButton>(myInterface[12]);
 	shared_ptr<GuiButton> tab = dynamic_pointer_cast<GuiButton>(myInterface[13]);
+
+	shared_ptr<GuiButton> l1 = dynamic_pointer_cast<GuiButton>(myInterface[23]);
+	shared_ptr<GuiButton> l2 = dynamic_pointer_cast<GuiButton>(myInterface[24]);
+	shared_ptr<GuiButton> l3 = dynamic_pointer_cast<GuiButton>(myInterface[25]);
+
 	shared_ptr<GuiButton> backButton = dynamic_pointer_cast<GuiButton>(myInterface[14]);
 
 	shared_ptr<ProgBar> progBar1 = dynamic_pointer_cast<ProgBar>(myInterface[15]);
@@ -109,6 +114,9 @@ void Game::startGame()
 	gui.add(tab2);
 	gui.add(tab3);
 	gui.add(tab);
+	gui.add(l1);
+	gui.add(l2);
+	gui.add(l3);
 	gui.add(backButton);
 	gui.add(progBar1);
 	gui.add(progBar2);
@@ -353,9 +361,12 @@ void Game::addTextAndScore()
 	myInterface.push_back(shared_ptr<Interface>(new ProgBar(1020, 100, 50)));
 	myInterface.push_back(shared_ptr<Interface>(new GuiButton(900, 600, 70, "BACK TO GAME", 20)));
 	myInterface.push_back(shared_ptr<Interface>(new TextButton("doYouWantSave", Color::Red, 80, 200, 550)));
-	myInterface.push_back(shared_ptr<Interface>(new GuiButton(450, 400, 90, "YES", 20)));
-	myInterface.push_back(shared_ptr<Interface>(new GuiButton(650, 400, 90, "NO", 20)));
+	myInterface.push_back(shared_ptr<Interface>(new GuiButton(450, 400, 90, "YES", 40)));
+	myInterface.push_back(shared_ptr<Interface>(new GuiButton(650, 400, 90, "NO", 40)));
 	myInterface.push_back(shared_ptr<Interface>(new TextButton("savedGame", Color::Red, 80, 200, 550)));
+	myInterface.push_back(shared_ptr<Interface>(new GuiButton(810, 40, 30, "HUNGRY", 20)));
+	myInterface.push_back(shared_ptr<Interface>(new GuiButton(910, 40, 30, "TIRED", 20)));
+	myInterface.push_back(shared_ptr<Interface>(new GuiButton(1010, 40, 30, "FUN", 20)));
 }
 
 void Game::setBackground(string bSource)
@@ -500,19 +511,16 @@ void Game::playground()
 	gui.add(backToGameButton);
 	if (typeid(*animal) == typeid(Dog))
 	{
-		dynamicObject = new Ball(200, 200, 20);
+		dynamicObjects.push_back(new Ball(200, 200, 20));
 	}
-	else
-	{
-		dynamicObject = new Box(200, 200, 20);
-	}
+
 	animal->setPosition(200, 300);
 	animal->setInitialPosition();
 	animal->changeEnableWalking(1);
 	window.setView(window.getDefaultView());
 	
 	Clock clock;
-	gameClock->update(animal);
+	gameClock->update(animal,window);
 	Event event;
 	while (gameState == "play")
 	{
@@ -531,6 +539,12 @@ void Game::playground()
 				animal->changeEnableWalking(0);
 				gameState = "new game";
 			}
+			if (event.mouseButton.button == sf::Mouse::Left)
+			{
+				cout << "the right button was pressed" <<endl;
+				sf::Vector2i localPosition = sf::Mouse::getPosition(window);
+				dynamicObjects.push_back(new Box(localPosition.x, localPosition.y, 50));
+			}
 		}
 		sleep(milliseconds(20));
 		
@@ -546,13 +560,15 @@ void Game::playground()
 		Time time = clock.getElapsedTime();
 		if (time.asSeconds() > 1)
 		{
-			gameClock->update(animal);
+			gameClock->update(animal,window);
 			clock.restart();
 		}
 		animal->play();
-		dynamicObject->update(animal);
-		dynamicObject->Draw(window);
-		
+		for (int i = 0; i < dynamicObjects.size(); i++)
+		{
+			dynamicObjects[i]->update(animal, window);
+			dynamicObjects[i]->Draw(window);
+		}
 		gui.draw();
 		gameClock->Draw(window);
 		animal->drawPlayer(window);

@@ -18,6 +18,6 @@ public:
 		this->setFillColor(Color::Red);
 		this->setPosition(posX,posY);
 	}
-	void update(Animal*&animal);
+	void update(Animal*&animal, RenderWindow &window);
 	void Draw(RenderWindow &window);
 };
