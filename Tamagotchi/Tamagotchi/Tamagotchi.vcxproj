@@ -134,6 +134,7 @@
     <ClCompile Include="DogFood.cpp" />
     <ClCompile Include="DogRepository.cpp" />
     <ClCompile Include="GameClock.cpp" />
+    <ClCompile Include="GraphicalObject.cpp" />
     <ClCompile Include="GuiButton.cpp" />
     <ClCompile Include="ProgBar.cpp" />
     <ClCompile Include="TextButton.cpp" />

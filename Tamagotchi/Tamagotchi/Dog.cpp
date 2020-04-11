@@ -1,7 +1,7 @@
 #include "Dog.h"
 #include "Ball.h"
 
-void Dog:: moveObject(char direction, float moveSpeed)
+void Dog:: moveAnimal(char direction, float moveSpeed)
 {
 	if (enableWalking == 1)
 	{
@@ -41,7 +41,6 @@ void Dog::eat()
 	{
 		counterEating = 0;
 	}
-	//progBar1->setValue(progBar1->getValue() - 0.1);
 }
 
 void Dog::sleep()
@@ -58,22 +57,22 @@ void Dog::play()
 {
 	if (Keyboard::isKeyPressed(Keyboard::Left))
 	{
-		this->moveObject('l', 6.0);
+		this->moveAnimal('l', 6.0);
 	}
 
 	if (Keyboard::isKeyPressed(Keyboard::Right))
 	{
-		this->moveObject('r', 6.0);
+		this->moveAnimal('r', 6.0);
 	}
 
 	if (Keyboard::isKeyPressed(Keyboard::Up))
 	{
-		this->moveObject('u', 6.0);
+		this->moveAnimal('u', 6.0);
 	}
 
 	if (Keyboard::isKeyPressed(Keyboard::Down))
 	{
-		this->moveObject('d', 6.0);
+		this->moveAnimal('d', 6.0);
 	}
 }
 
@@ -84,19 +83,4 @@ void Dog::setInitialPosition()
 	{
 		this->setPosition(posX, posY);
 	}
-}
-
-void Dog::setColorIterator(int colorIterator)
-{
-	this->colorIterator = colorIterator;
-}
-
-void Dog::changeEnableWalking(int e)
-{
-	this->enableWalking = e;
-}
-
-int Dog::getColorIterator()
-{
-	return this->colorIterator;
 }

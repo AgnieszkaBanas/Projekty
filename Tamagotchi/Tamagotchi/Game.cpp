@@ -50,7 +50,6 @@ void Game::showMenu()
 		window.clear();
 		window.draw(background);
 
-		
 		this->myInterface[0]->Draw(window);
 		if (this->myInterface[0]->containsMouse(mouse))
 		{
@@ -81,10 +80,10 @@ void Game::startGame()
 {
 	tgui::Gui gui(window);
 
-	shared_ptr<GuiButton> tab1 = dynamic_pointer_cast<GuiButton>(myInterface[10]);
-	shared_ptr<GuiButton> tab2 = dynamic_pointer_cast<GuiButton>(myInterface[11]);
-	shared_ptr<GuiButton> tab3 = dynamic_pointer_cast<GuiButton>(myInterface[12]);
-	shared_ptr<GuiButton> tab = dynamic_pointer_cast<GuiButton>(myInterface[13]);
+	shared_ptr<GuiButton> buttonEat = dynamic_pointer_cast<GuiButton>(myInterface[10]);
+	shared_ptr<GuiButton> buttonSleep = dynamic_pointer_cast<GuiButton>(myInterface[11]);
+	shared_ptr<GuiButton> buttonPlay = dynamic_pointer_cast<GuiButton>(myInterface[12]);
+	shared_ptr<GuiButton> whiteBox = dynamic_pointer_cast<GuiButton>(myInterface[13]);
 
 	shared_ptr<GuiButton> l1 = dynamic_pointer_cast<GuiButton>(myInterface[23]);
 	shared_ptr<GuiButton> l2 = dynamic_pointer_cast<GuiButton>(myInterface[24]);
@@ -109,11 +108,11 @@ void Game::startGame()
 	}
 	
 	Clock clock;
-	Clock clockFood;
-	gui.add(tab1);
-	gui.add(tab2);
-	gui.add(tab3);
-	gui.add(tab);
+	
+	gui.add(buttonEat);
+	gui.add(buttonSleep);
+	gui.add(buttonPlay);
+	gui.add(whiteBox);
 	gui.add(l1);
 	gui.add(l2);
 	gui.add(l3);
@@ -132,35 +131,34 @@ void Game::startGame()
 	Event event;
 	while (gameState == "new game")
 	{
-		Vector2f mouse2(Mouse::getPosition(window));
+		Vector2f mouse(Mouse::getPosition(window));
 		while (window.pollEvent(event))
 		{
 			if (event.type == Event::Closed)
 				gameState = "save";
-			if (backButton->containsMouse(mouse2))
+			if (backButton->containsMouse(mouse))
 				gameState = "menu";
 		}
-		
 		window.clear();
 
 		if (Keyboard::isKeyPressed(Keyboard::Left))
 		{
-			animal->moveObject('l', 6.0);
+			animal->moveAnimal('l', 6.0);
 		}
 
 		if (Keyboard::isKeyPressed(Keyboard::Right))
 		{
-			animal->moveObject('r', 6.0);
+			animal->moveAnimal('r', 6.0);
 		}
 
 		if (Keyboard::isKeyPressed(Keyboard::Up))
 		{
-			animal->moveObject('u', 6.0);
+			animal->moveAnimal('u', 6.0);
 		}
 
 		if (Keyboard::isKeyPressed(Keyboard::Down))
 		{
-			animal->moveObject('d', 6.0);
+			animal->moveAnimal('d', 6.0);
 		}
 		position.x = animal->getPosition().x + 24 - (1200 / 2);
 		position.y = animal->getPosition().y + 24 - (800 / 2);
@@ -179,12 +177,11 @@ void Game::startGame()
 		window.setView(view);
 		window.draw(background);
 		
-		animal->drawPlayer(window);
+		animal->drawAnimal(window);
 		
 		gui.draw();
 		
 		Time time = clock.getElapsedTime();
-		Time timeFood = clockFood.getElapsedTime();
 		
 		if ((progBar1->getValue() == 100)||(progBar2->getValue() == 100)||(progBar3->getValue() == 100))
 		{
@@ -202,13 +199,13 @@ void Game::startGame()
 			}
 			clock.restart();
 		}
-		if(tab2->containsMouse(mouse2))
+		if(buttonSleep->containsMouse(mouse))
 		{
 			flag = 1;
 			animal->sleep();
 			progBar2->setValue(progBar2->getValue() - 0.1);
 		}
-		else if(tab1->containsMouse(mouse2))
+		else if(buttonEat->containsMouse(mouse))
 		{
 			flag = 1;
 			animal->eat();
@@ -216,7 +213,7 @@ void Game::startGame()
 			food->Draw(window);
 			progBar1->setValue(progBar1->getValue() - 0.1);
 		}
-		else if (tab3->containsMouse(mouse2))
+		else if (buttonPlay->containsMouse(mouse))
 		{
 			gameClock->setClock(progBar3->getValue());
 			this->gameState = "play";
@@ -262,6 +259,7 @@ void Game::gameOver()
 		this->myInterface[2]->Draw(window);
 		this->myInterface[2]->Draw(window);
 		this->myInterface[2]->Draw(window);
+
 		if (this->myInterface[2]->containsMouse(mouse))
 		{
 			this->myInterface[2]->changeColor(Color::Green);
@@ -346,7 +344,7 @@ void Game::addTextAndScore()
 	myInterface.push_back(shared_ptr<Interface>(new TextButton("game over", Color::Red, 110, 400, 200)));
 	myInterface.push_back(shared_ptr<Interface>(new TextButton("exit", Color(24, 25, 40), 90, 480, 300)));
 	myInterface.push_back(shared_ptr<Interface>(new TextButton("continue game", Color(0, 0, 0, 255), 100, 375, 350)));
-	myInterface.push_back(shared_ptr<Interface>(new TextButton("back", Color::Red, 80, 400, 550)));
+	myInterface.push_back(shared_ptr<Interface>(new TextButton("back", Color::Red, 100, 400, 450)));
 	myInterface.push_back(shared_ptr<Interface>(new GuiButton(450, 400, 80, "CAT", 30)));
 	myInterface.push_back(shared_ptr<Interface>(new GuiButton(650, 400, 80, "DOG", 30)));
 	myInterface.push_back(shared_ptr<Interface>(new GuiButton(250, 500, 90, "1", 40)));
@@ -414,7 +412,7 @@ void Game::chooseColor()
 	Event event;
 	while (gameState == "choose color")
 	{
-		Vector2f mouse3(Mouse::getPosition(window));
+		Vector2f mouse(Mouse::getPosition(window));
 		while (window.pollEvent(event))
 		{
 			if (event.type == Event::Closed)
@@ -424,14 +422,14 @@ void Game::chooseColor()
 		}
 		window.clear();
 		
-		if (color1->containsMouse(mouse3))
+		if (color1->containsMouse(mouse))
 		{
 			cur = colorOfDog.find("brown");
 			animal->setColorIterator(cur->second);
 			animal->setInitialPosition();
 			gameState = "new game";
 		}
-		if (color2->containsMouse(mouse3))
+		if (color2->containsMouse(mouse))
 		{
 			
 			cur = colorOfDog.find("black");
@@ -439,7 +437,7 @@ void Game::chooseColor()
 			animal->setInitialPosition();
 			gameState = "new game";
 		}
-		if (color3->containsMouse(mouse3))
+		if (color3->containsMouse(mouse))
 		{
 			cur = colorOfDog.find("grey");
 			animal->setColorIterator(cur->second);
@@ -574,7 +572,7 @@ void Game::playground()
 		
 		gui.draw();
 		gameClock->Draw(window);
-		animal->drawPlayer(window);
+		animal->drawAnimal(window);
 		window.display();
 	}
 	this->updateGame();
