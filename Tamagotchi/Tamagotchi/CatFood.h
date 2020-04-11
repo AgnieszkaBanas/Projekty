@@ -15,7 +15,7 @@ class CatFood : public Food
 public:
 	CatFood(int pPosX, int pPosY, int pSize) :Food(pPosX, pPosY, pSize)
 	{
-		for (int i = 1; i <= 1; i++)
+		for (int i = 1; i <= 9; i++)
 		{
 			ostringstream ss;
 			ss << i;

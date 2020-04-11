@@ -101,7 +101,7 @@ void Game::startGame()
 	Food*food;
 	if (typeid(*animal) == typeid(Cat))
 	{
-		food = new CatFood(1, 1,1);
+		food = new CatFood(1, 300,1);
 	}
 	else
 	{
@@ -117,7 +117,7 @@ void Game::startGame()
 	gui.add(l1);
 	gui.add(l2);
 	gui.add(l3);
-	gui.add(backButton);
+	//gui.add(backButton);
 	gui.add(progBar1);
 	gui.add(progBar2);
 	gui.add(progBar3);
@@ -281,9 +281,8 @@ void Game::gameOver()
 		}
 		window.display();
 	}
-	//this->buttons[1]->resetScore();
 	
-		this->updateGame();
+	this->updateGame();
 }
 
 void Game::updateGame()

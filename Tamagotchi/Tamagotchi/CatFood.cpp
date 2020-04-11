@@ -11,10 +11,10 @@ void CatFood::eatIt(Animal *& animal)
 	{
 		cerr << "Error";
 	}
-	this->setPosition(animal->getPosition().x-30, animal->getPosition().y + 20);
+	this->setPosition(animal->getPosition().x-30, animal->getPosition().y + 45);
 	this->setTexture(catFoodTexture);
-	//counterEatingFood++;
-	if (counterEatingFood == 7)
+	counterEatingFood++;
+	if (counterEatingFood == 9)
 	{
 		counterEatingFood = 0;
 	}
