@@ -22,6 +22,7 @@
 
 void Game::showMenu()
 {
+	myInterface.setTarget(window);
 	Event event;
 	while (gameState == "menu")
 	{
@@ -35,7 +36,15 @@ void Game::showMenu()
 
 			if (event.type == Event::MouseButtonReleased)
 			{
-				
+				if (myInterface.doesTextButtonsMenuContainMouse(mouse, "NEW GAME"))
+				{
+					gameState = "choose animal";
+				}
+				if (myInterface.doesTextButtonsMenuContainMouse(mouse, "CONTINUE GAME"))
+				{
+					gameState = "continue game";
+				}
+				/*
 				if (this->myInterface[0]->gGlobalBounds().contains(mouse) && event.mouseButton.button == Mouse::Left)
 				{
 					gameState = "choose animal";
@@ -45,12 +54,30 @@ void Game::showMenu()
 				{
 					gameState = "continue game";
 				}
-				
+				*/
 			}
 		}
 		window.clear();
 		window.draw(background);
+		myInterface.drawTextButtonsMenu(window);
+		if (myInterface.doesTextButtonsMenuContainMouse(mouse, "NEW GAME"))
+		{
+			myInterface.changeColorOfTextButtonMenu("NEW GAME", Color(100, 100, 100));
+		}
+		else
+		{
+			myInterface.changeColorOfTextButtonMenu("NEW GAME", Color(24, 34, 65, 76));
+		}
 
+		if (myInterface.doesTextButtonsMenuContainMouse(mouse, "CONTINUE GAME"))
+		{
+			myInterface.changeColorOfTextButtonMenu("CONTINUE GAME", Color(100, 100, 100));
+		}
+		else
+		{
+			myInterface.changeColorOfTextButtonMenu("CONTINUE GAME", Color(24, 34, 65, 76));
+		}
+		/*
 		this->myInterface[0]->drawInterface(window);
 		if (this->myInterface[0]->containsMouse(mouse))
 		{
@@ -70,7 +97,7 @@ void Game::showMenu()
 		{
 			this->myInterface[3]->changeColor(Color(130, 70, 65));
 		}
-		
+		*/
 		window.display();
 	}
 	this->updateGame();
@@ -79,6 +106,7 @@ void Game::showMenu()
 
 void Game::startGame()
 {
+	/*
 	tgui::Gui gui(window);
 
 	shared_ptr<GuiButton> buttonEat = dynamic_pointer_cast<GuiButton>(myInterface[10]);
@@ -97,7 +125,7 @@ void Game::startGame()
 	shared_ptr<ProgBar> progBar3 = dynamic_pointer_cast<ProgBar>(myInterface[17]);
 
 	progBar3->setValue(gameClock->getCounter());
-	
+	*/
 	Food*food;
 	if (typeid(*animal) == typeid(Cat))
 	{
@@ -109,7 +137,7 @@ void Game::startGame()
 	}
 	
 	Clock clock;
-	
+	/*
 	gui.add(buttonEat);
 	gui.add(buttonSleep);
 	gui.add(buttonPlay);
@@ -121,6 +149,7 @@ void Game::startGame()
 	gui.add(progBar1);
 	gui.add(progBar2);
 	gui.add(progBar3);
+	*/
 	int z = 0;
 	int suma = 1200;
 	for(int i=0;i<100;i++)
@@ -137,8 +166,10 @@ void Game::startGame()
 		{
 			if (event.type == Event::Closed)
 				gameState = "save";
+			/*
 			if (backButton->containsMouse(mouse))
 				gameState = "menu";
+				*/
 		}
 		window.clear();
 
@@ -179,12 +210,11 @@ void Game::startGame()
 		window.draw(background);
 		
 		animal->drawAnimal(window);
-		
-		gui.draw();
+		myInterface.draw();
 		
 		Time time = clock.getElapsedTime();
 		
-		if ((progBar1->getValue() == 100)||(progBar2->getValue() == 100)||(progBar3->getValue() == 100))
+		if (myInterface.checkValuesOfProgBars())
 		{
 			gameState = "game over";
 		}
@@ -192,40 +222,41 @@ void Game::startGame()
 		{
 			if (flag == 0)
 			{
-				progBar1->incrementValue();
-
-				progBar2->incrementValue();
-
-				progBar3->incrementValue();
+				myInterface.incrementValuesOfProgBar();
 			}
 			clock.restart();
 		}
-		if(buttonSleep->containsMouse(mouse))
+		
+		if(myInterface.doesTguiStartGameContainMouse(mouse,"SLEEP"))
 		{
 			flag = 1;
 			animal->sleep();
-			progBar2->setValue(progBar2->getValue() - 0.1);
+			myInterface.decrementValueOfProgBar("SLEEP");
 		}
-		else if(buttonEat->containsMouse(mouse))
+		else if(myInterface.doesTguiStartGameContainMouse(mouse, "EAT"))
 		{
 			flag = 1;
 			animal->eat();
 			food->eatIt(animal);
 			food->drawFood(window);
-			progBar1->setValue(progBar1->getValue() - 0.1);
+			myInterface.decrementValueOfProgBar("EAT");
 		}
-		else if (buttonPlay->containsMouse(mouse))
+		
+		else if (myInterface.doesTguiStartGameContainMouse(mouse, "PLAY"))
 		{
-			gameClock->setClock(progBar3->getValue());
+			gameClock->setClock(myInterface.getValueOfProgBar("PLAY"));
 			this->gameState = "play";
 		}
+		
 		else
 		{
 			flag = 0;
 			animal->setInitialPosition();
 		}
+		
 		window.display();
 	}
+	myInterface.removeAllWidgets();
 	this->updateGame();
 }
 
@@ -239,7 +270,7 @@ void Game::gameOver()
 
 		while (window.pollEvent(event))
 		{
-			
+			/*
 			if (this->myInterface[2]->gGlobalBounds().contains(mouse) && event.mouseButton.button == Mouse::Left)
 			{
 				gameState = "exit";
@@ -252,10 +283,10 @@ void Game::gameOver()
 			{
 				gameState = "menu";
 			}
-			
+			*/
 		}
 		window.clear(Color::Magenta);
-		
+		/*
 		this->myInterface[1]->drawInterface(window);
 		this->myInterface[2]->drawInterface(window);
 		this->myInterface[2]->drawInterface(window);
@@ -278,6 +309,7 @@ void Game::gameOver()
 		{
 			this->myInterface[4]->changeColor(Color::Red);
 		}
+		*/
 		window.display();
 	}
 	
@@ -341,6 +373,10 @@ void Game::updateGame()
 
 void Game::addTextAndScore()
 {
+	myInterface.addTextButtonsMenu();
+	myInterface.addTguiChooseAnimal();
+	//myInterface.addTguiChooseAnimal();
+	/*
 	myInterface.push_back(shared_ptr<Interface>(new TextButton("new game", Color(24, 34, 65, 76), 120, 420, 200)));
 	myInterface.push_back(shared_ptr<Interface>(new TextButton("game over", Color::Red, 110, 400, 200)));
 	myInterface.push_back(shared_ptr<Interface>(new TextButton("exit", Color(24, 25, 40), 90, 480, 300)));
@@ -367,6 +403,7 @@ void Game::addTextAndScore()
 	myInterface.push_back(shared_ptr<Interface>(new GuiButton(810, 40, 30, "HUNGRY", 20)));
 	myInterface.push_back(shared_ptr<Interface>(new GuiButton(910, 40, 30, "TIRED", 20)));
 	myInterface.push_back(shared_ptr<Interface>(new GuiButton(1010, 40, 30, "FUN", 20)));
+	*/
 }
 
 void Game::setBackground(string bSource)
@@ -386,6 +423,7 @@ void Game::setBackground(string bSource)
 
 void Game::chooseColor()
 {
+	/*
 	tgui::Gui gui(window);
 
 	shared_ptr<GuiButton> color1 = dynamic_pointer_cast<GuiButton>(myInterface[7]);
@@ -395,7 +433,7 @@ void Game::chooseColor()
 	gui.add(color1);
 	gui.add(color2);
 	gui.add(color3);
-
+	*/
 	if (typeid(*animal) == typeid(Dog))
 	{
 		animalPicture.push_back(AnimalPicture(0, "fafik6.png", 2.5, 220, 300, 86,1));
@@ -408,6 +446,8 @@ void Game::chooseColor()
 		animalPicture.push_back(AnimalPicture(4, "cat1.png", 6, 520, 300, 32,0));
 		animalPicture.push_back(AnimalPicture(8, "cat1.png", 6, 820, 300, 32,0));
 	}
+
+	myInterface.addTguiChooseColor();
 
 	map<string,int>::iterator cur;
 	Event event;
@@ -423,14 +463,14 @@ void Game::chooseColor()
 		}
 		window.clear();
 		
-		if (color1->containsMouse(mouse))
+		if (myInterface.doesTguiChooseColorContainMouse(mouse,"1"))
 		{
 			cur = colorOfDog.find("brown");
 			animal->setColorIterator(cur->second);
 			animal->setInitialPosition();
 			gameState = "new game";
 		}
-		if (color2->containsMouse(mouse))
+		if (myInterface.doesTguiChooseColorContainMouse(mouse, "2"))
 		{
 			
 			cur = colorOfDog.find("black");
@@ -438,15 +478,16 @@ void Game::chooseColor()
 			animal->setInitialPosition();
 			gameState = "new game";
 		}
-		if (color3->containsMouse(mouse))
+		if (myInterface.doesTguiChooseColorContainMouse(mouse, "3"))
 		{
 			cur = colorOfDog.find("grey");
 			animal->setColorIterator(cur->second);
 			animal->setInitialPosition();
 			gameState = "new game";
 		}
+		
 		window.draw(background);
-		gui.draw();
+		myInterface.draw();
 		list<AnimalPicture> ::iterator it;
 		for (it = animalPicture.begin(); it != animalPicture.end(); ++it)
 		{
@@ -460,18 +501,22 @@ void Game::chooseColor()
 		*/
 		window.display();
 	}
+	myInterface.removeAllWidgets();
+	myInterface.addElementsOfGame();
 	this->updateGame();
 }
 
 void Game::chooseAnimal()
 {
-	tgui::Gui gui(window);
-
+	//tgui::Gui gui;
+	/*
 	shared_ptr<GuiButton> catButton = dynamic_pointer_cast<GuiButton>(myInterface[5]);
 	shared_ptr<GuiButton> dogButton = dynamic_pointer_cast<GuiButton>(myInterface[6]);
 	gui.add(catButton);
 	gui.add(dogButton);
+	*/
 	map<string, int>::iterator cur;
+
 	Event event;
 	while (gameState == "choose animal")
 	{
@@ -485,30 +530,32 @@ void Game::chooseAnimal()
 		}
 		window.clear();
 		
-		if (catButton->containsMouse(mouse3))
+		if (myInterface.doesTguiChooseAnimalContainMouse(mouse3,"CAT"))
 		{
 			animal = new Cat("cat1.png", 0, 785, 5);
 			gameState = "choose color";
 		}
 		
-		if (dogButton->containsMouse(mouse3))
+		if (myInterface.doesTguiChooseAnimalContainMouse(mouse3, "DOG"))
 		{
 			animal = new Dog("fafik6.png",0,780,2);
 			gameState = "choose color";
 		}
 		window.draw(background);
-		gui.draw();
+		myInterface.draw();
 		window.display();
 	}
+	myInterface.removeAllWidgets();
 	this->updateGame();
 }
 
 void Game::playground()
 {
+	/*
 	tgui::Gui gui(window);
 	shared_ptr<GuiButton> backToGameButton = dynamic_pointer_cast<GuiButton>(myInterface[18]);
-	
 	gui.add(backToGameButton);
+	*/
 	if (typeid(*animal) == typeid(Dog))
 	{
 		dynamicObjects.push_back(new Ball(200, 200, 20));
@@ -531,6 +578,7 @@ void Game::playground()
 			{
 				gameState = "exit";
 			}
+			/*
 			if (backToGameButton->containsMouse(mouse3))
 			{
 				animal->flagPosition = 1;
@@ -539,6 +587,7 @@ void Game::playground()
 				animal->changeEnableWalking(0);
 				gameState = "new game";
 			}
+			*/
 			if (event.mouseButton.button == sf::Mouse::Left)
 			{
 				cout << "the right button was pressed" <<endl;
@@ -571,7 +620,7 @@ void Game::playground()
 			dynamicObjects[i]->drawDynamicObject(window);
 		}
 	
-		gui.draw();
+		//gui.draw();
 		gameClock->drawDynamicObject(window);
 		animal->drawAnimal(window);
 		window.display();
@@ -581,13 +630,15 @@ void Game::playground()
 
 void Game::doYouWantSave()
 {
+	/*
 	tgui::Gui gui(window);
 	shared_ptr<GuiButton> buttonYes = dynamic_pointer_cast<GuiButton>(myInterface[20]);
 	shared_ptr<GuiButton> buttonNo = dynamic_pointer_cast<GuiButton>(myInterface[21]);
 	gui.add(buttonYes);
 	gui.add(buttonNo);
+	*/
 	window.setView(window.getDefaultView());
-
+	myInterface.addSaveElements();
 	Event event;
 	while (gameState == "save")
 	{
@@ -599,31 +650,35 @@ void Game::doYouWantSave()
 			{
 				gameState = "exit";
 			}
-			if (buttonNo->containsMouse(mouse))
+			
+			if (myInterface.doesTguiWantSaveGameContainMouse(mouse,"NO"))
 			{
 				gameState = "exit";
 			}
-			if (buttonYes->containsMouse(mouse))
+			if (myInterface.doesTguiWantSaveGameContainMouse(mouse, "YES"))
 			{
 				gameState = "saving game";
 			}
+			
 		}
 		window.clear(Color::Magenta);
 
-		this->myInterface[19]->drawInterface(window);
-		gui.draw();
+		//this->myInterface[19]->drawInterface(window);
+		myInterface.drawWantToSave(window);
+		myInterface.draw();
 		window.display();
 	}
-
+	myInterface.removeAllWidgets();
 	this->updateGame();
 }
 
 void Game::savingGame()
 {
+	/*
 	shared_ptr<ProgBar> progBar1 = dynamic_pointer_cast<ProgBar>(myInterface[15]);
 	shared_ptr<ProgBar> progBar2 = dynamic_pointer_cast<ProgBar>(myInterface[16]);
 	shared_ptr<ProgBar> progBar3 = dynamic_pointer_cast<ProgBar>(myInterface[17]);
-
+	*/
 	Event event;
 	if (typeid(*animal) == typeid(Dog))
 	{
@@ -633,7 +688,8 @@ void Game::savingGame()
 	{
 		repository = new CatRepository();
 	}
-	repository->saveData(progBar1->getValue(), progBar2->getValue(), progBar3->getValue(),animal->getColorIterator());
+	myInterface.addSavedGame();
+	repository->saveData(myInterface.getValueOfProgBar("EAT"), myInterface.getValueOfProgBar("SLEEP"), myInterface.getValueOfProgBar("PLAY"),animal->getColorIterator());
 	while (gameState == "saving game")
 	{
 		Vector2f mouse(Mouse::getPosition(window));
@@ -646,7 +702,8 @@ void Game::savingGame()
 			}
 		}
 		window.clear(Color::Magenta);
-		this->myInterface[22]->drawInterface(window);
+		myInterface.drawSavedGame(window);
+		//this->myInterface[22]->drawInterface(window);
 		window.display();
 	}
 
@@ -655,6 +712,7 @@ void Game::savingGame()
 
 void Game::continueGame()
 {
+	/*
 	tgui::Gui gui(window);
 
 	shared_ptr<GuiButton> catButton = dynamic_pointer_cast<GuiButton>(myInterface[5]);
@@ -664,47 +722,58 @@ void Game::continueGame()
 	shared_ptr<ProgBar> progBar3 = dynamic_pointer_cast<ProgBar>(myInterface[17]);
 	gui.add(catButton);
 	gui.add(dogButton);
+	*/
+	myInterface.addTguiChooseAnimal();
 	map<string, int>::iterator cur;
 	Event event;
 	while (gameState == "continue game")
 	{
 		Vector2f mouse3(Mouse::getPosition(window));
+		window.clear();
+
+		window.draw(background);
+		myInterface.draw();
+		window.display();
 		while (window.pollEvent(event))
 		{
 			if (event.type == Event::Closed)
 			{
 				gameState = "exit";
 			}
-			if (dogButton->containsMouse(mouse3))
+			
+			if (myInterface.doesTguiChooseAnimalContainMouse(mouse3,"DOG"))
 			{
 				repository = new DogRepository();
 				Data data;
 				data = repository->readData();
 				animal = new Dog("fafik6.png", 0, 780, 2);
-				progBar1->setValue(data.pBV1);
-				progBar2->setValue(data.pBV2);
-				progBar3->setValue(data.pBV3);
+
+				myInterface.removeAllWidgets();
+				myInterface.addElementsOfGame();
+				myInterface.setValuesOfProgBars("EAT", data.pBV1);
+				myInterface.setValuesOfProgBars("SLEEP", data.pBV2);
+				myInterface.setValuesOfProgBars("PLAY", data.pBV3);
+			
 				animal->setColorIterator(data.color);
 				gameState = "new game";
 			}
-			if (catButton->containsMouse(mouse3))
+			if (myInterface.doesTguiChooseAnimalContainMouse(mouse3, "CAT"))
 			{
 				repository = new CatRepository();
 				Data data;
 				data = repository->readData();
 				animal = new Cat("cat1.png", 0, 785, 5);
 				animal->setColorIterator(data.color);
-				progBar1->setValue(data.pBV1);
-				progBar2->setValue(data.pBV2);
-				progBar3->setValue(data.pBV3);
+				myInterface.removeAllWidgets();
+				myInterface.addElementsOfGame();
+				myInterface.setValuesOfProgBars("EAT", data.pBV1);
+				myInterface.setValuesOfProgBars("SLEEP", data.pBV2);
+				myInterface.setValuesOfProgBars("PLAY", data.pBV3);
+
 				gameState = "new game";
 			}
+			
 		}
-		window.clear();
-
-		window.draw(background);
-		gui.draw();
-		window.display();
 	}
 	this->updateGame();
 }
