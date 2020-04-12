@@ -8,7 +8,7 @@ void Box::update(Animal *& animal, RenderWindow &window)
 	}
 }
 
-void Box::Draw(RenderWindow & window)
+void Box::drawDynamicObject(RenderWindow & window)
 {
 	window.draw(*this);
 }

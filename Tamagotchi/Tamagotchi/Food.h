@@ -17,6 +17,6 @@ public:
 		posY = pPosY;
 		size = pSize;
 	}
-	virtual void Draw(RenderWindow &window)=0;
+	void drawFood(RenderWindow &window);
 	virtual void eatIt(Animal *& animal) = 0;
 };

@@ -9,18 +9,12 @@ using namespace sf;
 
 class TextButton: public MyButton
 {
-	Text text;
-	Color textColor;
 public:
 	//MButton() {};
 	TextButton(string ptextState, Color pTextColor, int pTextSize, int pX, int pY):MyButton(pX,pY,pTextSize,ptextState)
 	{
 		textColor = pTextColor;
 	};
-	void Draw(RenderWindow &window);
-	float getX();
-	float getY();
-	FloatRect gGlobalBounds();
-	void changeColor(Color textColor);
+	void drawInterface(RenderWindow & window);
 	bool containsMouse(Vector2f & mouse);
 };

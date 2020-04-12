@@ -1,18 +1,5 @@
 #include "GuiButton.h"
 
-FloatRect GuiButton::gGlobalBounds()
-{
-	return FloatRect();
-}
-
-void GuiButton::Draw(RenderWindow & window)
-{
-}
-
-void GuiButton::changeColor(Color textColor)
-{
-}
-
 bool GuiButton::containsMouse(Vector2f & mouse)
 {
 	if (this->mouseOnWidget(mouse))
@@ -21,7 +8,7 @@ bool GuiButton::containsMouse(Vector2f & mouse)
 		return false;
 }
 
-void GuiButton::changePosition(int pPosX, int pPosY)
+void GuiButton::drawInterface(RenderWindow & window)
 {
-	this->setPosition(pPosX, pPosY);
+
 }

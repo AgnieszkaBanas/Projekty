@@ -9,7 +9,7 @@ void GameClock::update(Animal*&animal, RenderWindow &window)
 	counter--;
 }
 
-void GameClock::Draw(RenderWindow & window)
+void GameClock::drawDynamicObject(RenderWindow & window)
 {
 	window.draw(*this);
 }

@@ -13,7 +13,7 @@ void Ball::update(Animal*&animal, RenderWindow &window)
 		velocity.y = -ballVelocity;
 }
 
-void Ball::Draw(RenderWindow & window)
+void Ball::drawDynamicObject(RenderWindow & window)
 {
 	window.draw(*this);
 }

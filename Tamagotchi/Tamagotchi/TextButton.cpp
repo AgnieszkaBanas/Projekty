@@ -1,7 +1,7 @@
 #include "TextButton.h"
 #include <TGUI/TGUI.hpp>
 
-void TextButton::Draw(RenderWindow & window)
+void TextButton::drawInterface(RenderWindow & window)
 {
 	if (buttonText == "new game")
 	{
@@ -64,30 +64,6 @@ void TextButton::Draw(RenderWindow & window)
 		text.setString("YOU SAVED THE GAME!");
 	}
 	window.draw(text);
-}
-
-
-float TextButton::getX()
-{
-	return 0.0f;
-}
-
-float TextButton::getY()
-{
-	return 0.0f;
-}
-
-
-FloatRect TextButton::gGlobalBounds()
-{
-	return this->text.getGlobalBounds();
-}
-
-
-void TextButton::changeColor(Color textColor)
-{
-	this->textColor = textColor;
-	this->text.setFillColor(textColor);
 }
 
 bool TextButton::containsMouse(Vector2f & mouse)

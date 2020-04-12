@@ -17,5 +17,5 @@ public:
 		this->setSize(Vector2f(size,size));
 	}
 	void update(Animal*&animal, RenderWindow &window);
-	void Draw(RenderWindow &window);
+	void drawDynamicObject(RenderWindow &window);
 };

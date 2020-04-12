@@ -1,10 +1,5 @@
 #include "CatFood.h"
 
-void CatFood::Draw(RenderWindow & window)
-{
-	window.draw(*this);
-}
-
 void CatFood::eatIt(Animal *& animal)
 {
 	if (!catFoodTexture.loadFromFile(catFoodTextures[counterEatingFood]))

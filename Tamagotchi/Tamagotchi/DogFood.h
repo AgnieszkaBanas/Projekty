@@ -31,6 +31,5 @@ public:
 		this->setPosition(posX, posY);
 		this->setScale(size, size);
 	}
-	void Draw(RenderWindow &window);
 	void eatIt(Animal *& animal);
 };

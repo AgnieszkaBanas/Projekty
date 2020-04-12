@@ -10,12 +10,12 @@ class Interface
 protected:
 	int posX, posY;
 	int size;
+	Text text;
+	Color textColor;
 public:
-	Interface(int pPosX, int pPosY, int pSize) : posX(pPosX), posY(pPosY), size(pSize) 
-	{
-	};
-	virtual FloatRect gGlobalBounds()=0;
-	virtual void Draw(RenderWindow &window)=0;
-	virtual void changeColor(Color textColor)=0;
+	Interface(int pPosX, int pPosY, int pSize) : posX(pPosX), posY(pPosY), size(pSize) {};
+	virtual void drawInterface(RenderWindow & window) = 0;
+	FloatRect gGlobalBounds();
+	void changeColor(Color textColor);
 	virtual bool containsMouse(Vector2f & mouse)=0;
 };

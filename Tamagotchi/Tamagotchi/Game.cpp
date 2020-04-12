@@ -1,6 +1,7 @@
 #include <fstream>
 #include <ctime>
 #include <typeinfo>
+#include <algorithm>
 #include "Game.h"
 #include "Dog.h"
 #include "Cat.h"
@@ -13,7 +14,7 @@
 #include "GameClock.h"
 #include "AnimalPicture.h"
 #include "DogRepository.h"
-#include "CatRepository.h"
+#include "CatRepository.h"  
 #include "Interface.h"
 #include <TGUI/TGUI.hpp>
 #include <TGUI/Widgets/ClickableWidget.hpp>
@@ -50,7 +51,7 @@ void Game::showMenu()
 		window.clear();
 		window.draw(background);
 
-		this->myInterface[0]->Draw(window);
+		this->myInterface[0]->drawInterface(window);
 		if (this->myInterface[0]->containsMouse(mouse))
 		{
 			this->myInterface[0]->changeColor(Color(100,100,100));
@@ -60,7 +61,7 @@ void Game::showMenu()
 			this->myInterface[0]->changeColor(Color(130,70,65));
 		}
 
-		this->myInterface[3]->Draw(window);
+		this->myInterface[3]->drawInterface(window);
 		if (this->myInterface[3]->containsMouse(mouse))
 		{
 			this->myInterface[3]->changeColor(Color(100, 100, 100));
@@ -210,7 +211,7 @@ void Game::startGame()
 			flag = 1;
 			animal->eat();
 			food->eatIt(animal);
-			food->Draw(window);
+			food->drawFood(window);
 			progBar1->setValue(progBar1->getValue() - 0.1);
 		}
 		else if (buttonPlay->containsMouse(mouse))
@@ -255,10 +256,10 @@ void Game::gameOver()
 		}
 		window.clear(Color::Magenta);
 		
-		this->myInterface[1]->Draw(window);
-		this->myInterface[2]->Draw(window);
-		this->myInterface[2]->Draw(window);
-		this->myInterface[2]->Draw(window);
+		this->myInterface[1]->drawInterface(window);
+		this->myInterface[2]->drawInterface(window);
+		this->myInterface[2]->drawInterface(window);
+		this->myInterface[2]->drawInterface(window);
 
 		if (this->myInterface[2]->containsMouse(mouse))
 		{
@@ -268,7 +269,7 @@ void Game::gameOver()
 		{
 			this->myInterface[2]->changeColor(Color::Red);
 		}
-		this->myInterface[4]->Draw(window);
+		this->myInterface[4]->drawInterface(window);
 		if (this->myInterface[4]->containsMouse(mouse))
 		{
 			this->myInterface[4]->changeColor(Color::Green);
@@ -567,11 +568,11 @@ void Game::playground()
 		for (int i = 0; i < dynamicObjects.size(); i++)
 		{
 			dynamicObjects[i]->update(animal, window);
-			dynamicObjects[i]->Draw(window);
+			dynamicObjects[i]->drawDynamicObject(window);
 		}
-		
+	
 		gui.draw();
-		gameClock->Draw(window);
+		gameClock->drawDynamicObject(window);
 		animal->drawAnimal(window);
 		window.display();
 	}
@@ -609,7 +610,7 @@ void Game::doYouWantSave()
 		}
 		window.clear(Color::Magenta);
 
-		this->myInterface[19]->Draw(window);
+		this->myInterface[19]->drawInterface(window);
 		gui.draw();
 		window.display();
 	}
@@ -645,7 +646,7 @@ void Game::savingGame()
 			}
 		}
 		window.clear(Color::Magenta);
-		this->myInterface[22]->Draw(window);
+		this->myInterface[22]->drawInterface(window);
 		window.display();
 	}
 
