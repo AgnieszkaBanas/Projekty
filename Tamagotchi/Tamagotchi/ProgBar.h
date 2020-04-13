@@ -12,7 +12,5 @@ class ProgBar: public tgui::ProgressBar, public tgui::ProgressBarRenderer
 public:
 	//ProgBar() {};
 	ProgBar(){};
-	bool containsMouse(Vector2f & mouse);
-	void drawInterface(RenderWindow & window);
 	void setParameters(int pPosX, int pPosY, int pSize);
 };

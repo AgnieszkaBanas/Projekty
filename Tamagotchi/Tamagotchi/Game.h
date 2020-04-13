@@ -26,10 +26,7 @@ class Game
 	Vector2u textureSize;  //Added to store texture size.
 	Vector2u windowSize;   //Added to store window size.
 	float scaleX, scaleY;
-	//vector<Score*> scores;
-	//vector<shared_ptr<Interface>> myInterface;
 	Interface myInterface;
-	//vector<TextButton*> buttons;
 	Font font;
 	string gameState;
 	vector<DynamicObject*> dynamicObjects;

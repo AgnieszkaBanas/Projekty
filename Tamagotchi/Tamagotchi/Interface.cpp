@@ -15,10 +15,55 @@ void Interface::changeColor(Color textColor)
 }
 */
 
-void Interface::addTextButtonsMenu()
+void Interface::setParametersOfInterfaceElements()
 {
 	newGame.setParameters("NEW GAME", Color(24, 34, 65, 76), 120, 420, 200);
 	continueGame.setParameters("CONTINUE GAME", Color(0, 0, 0, 255), 100, 375, 350);
+
+	catButton = make_shared<GuiButton>();
+	dogButton = make_shared<GuiButton>();
+	catButton->setParameters(450, 400, 80, "CAT", 30);
+	dogButton->setParameters(650, 400, 80, "DOG", 30);
+
+	firstColor = make_shared<GuiButton>();
+	secondColor = make_shared<GuiButton>();
+	thirdColor = make_shared<GuiButton>();
+	firstColor->setParameters(250, 500, 90, "1", 40);
+	secondColor->setParameters(550, 500, 90, "2", 40);
+	thirdColor->setParameters(850, 500, 90, "3", 40);
+
+	eat = make_shared<GuiButton>();
+	sleep = make_shared<GuiButton>();
+	play = make_shared<GuiButton>();
+	eat->setParameters(200, 10, 50, "EAT", 20);
+	sleep->setParameters(300, 10, 50, "SLEEP", 20);
+	play->setParameters(400, 10, 50, "PLAY", 20);
+
+	hungry = make_shared<GuiButton>();
+	tired = make_shared<GuiButton>();
+	fun = make_shared<GuiButton>();
+	hungry->setParameters(810, 40, 30, "HUNGRY", 20);
+	tired->setParameters(910, 40, 30, "TIRED", 20);
+	fun->setParameters(1010, 40, 30, "FUN", 20);
+
+	progBar1 = make_shared<ProgBar>();
+	progBar2 = make_shared<ProgBar>();
+	progBar3 = make_shared<ProgBar>();
+	progBar1->setParameters(820, 100, 50);
+	progBar2->setParameters(920, 100, 50);
+	progBar3->setParameters(1020, 100, 50);
+
+	yes = make_shared<GuiButton>();
+	no = make_shared<GuiButton>();
+	yes->setParameters(440, 400, 90, "YES", 40);
+	no->setParameters(640, 400, 90, "NO", 40);
+
+	backToGame = make_shared<GuiButton>();
+	backToGame->setParameters(800, 650, 100, "BACK TO GAME", 20);
+}
+
+void Interface::addTextButtonsMenu()
+{
 	textButtonsMenu.push_back(newGame);
 	textButtonsMenu.push_back(continueGame);
 }
@@ -63,11 +108,6 @@ void Interface::changeColorOfTextButtonMenu(string buttonText, Color color)
 
 void Interface::addTguiChooseAnimal()
 {
-	catButton = make_shared<GuiButton>();
-	dogButton = make_shared<GuiButton>();
-	catButton->setParameters(450, 400, 80, "CAT", 30);
-
-	dogButton->setParameters(650, 400, 80, "DOG", 30);
 	this->add(catButton);
 	this->add(dogButton);
 }
@@ -88,12 +128,6 @@ bool Interface::doesTguiChooseAnimalContainMouse(Vector2f & mouse, string button
 
 void Interface::addTguiChooseColor()
 {
-	firstColor = make_shared<GuiButton>();
-	secondColor = make_shared<GuiButton>();
-	thirdColor = make_shared<GuiButton>();
-	firstColor->setParameters(250, 500, 90, "1", 40);
-	secondColor->setParameters(550, 500, 90, "2", 40);
-	thirdColor->setParameters(850, 500, 90, "3", 40);
 	this->add(firstColor);
 	this->add(secondColor);
 	this->add(thirdColor);
@@ -120,32 +154,14 @@ bool Interface::doesTguiChooseColorContainMouse(Vector2f & mouse, string buttonT
 
 void Interface::addElementsOfGame()
 {
-	eat = make_shared<GuiButton>();
-	sleep = make_shared<GuiButton>();
-	play = make_shared<GuiButton>();
-	eat->setParameters(200, 10, 50, "EAT", 20);
-	sleep->setParameters(300, 10, 50, "SLEEP", 20);
-	play->setParameters(400, 10, 50, "PLAY", 20);
 	this->add(eat);
 	this->add(sleep);
 	this->add(play);
 
-	hungry = make_shared<GuiButton>();
-	tired = make_shared<GuiButton>();
-	fun = make_shared<GuiButton>();
-	hungry->setParameters(810, 40, 30, "HUNGRY", 20);
-	tired->setParameters(910, 40, 30, "TIRED", 20);
-	fun->setParameters(1010, 40, 30, "FUN", 20);
 	this->add(hungry);
 	this->add(tired);
 	this->add(fun);
 
-	progBar1 = make_shared<ProgBar>();
-	progBar2 = make_shared<ProgBar>();
-	progBar3 = make_shared<ProgBar>();
-	progBar1->setParameters(820, 100, 50);
-	progBar2->setParameters(920, 100, 50);
-	progBar3->setParameters(1020, 100, 50);
 	this->add(progBar1);
 	this->add(progBar2);
 	this->add(progBar3);
@@ -219,10 +235,6 @@ int Interface::getValueOfProgBar(string progBarName)
 
 void Interface::addSaveElements()
 {
-	yes = make_shared<GuiButton>();
-	no = make_shared<GuiButton>();
-	yes->setParameters(440, 400, 90, "YES", 40);
-	no->setParameters(640, 400, 90, "NO", 40);
 	this->add(yes);
 	this->add(no);
 
@@ -270,7 +282,61 @@ void Interface::setValuesOfProgBars(string progBarName,int value)
 	}
 	if (progBarName == "PLAY")
 	{
-		progBar2->setValue(value);
+		progBar3->setValue(value);
+	}
+}
+
+void Interface::addTextButtonsGameOver()
+{
+	gameOver.setParameters("GAME OVER", Color::Red, 110, 400, 200);
+	exitGame.setParameters("EXIT", Color(24, 25, 40), 90, 480, 300);
+	backToMenu.setParameters("BACK TO MENU", Color::Red, 100, 400, 450);
+}
+
+void Interface::drawTextButtonsGameOver(RenderWindow & window)
+{
+	gameOver.drawTextButton(window);
+	exitGame.drawTextButton(window);
+	backToMenu.drawTextButton(window);
+}
+
+bool Interface::doesTextButtonGameOverContainMouse(Vector2f & mouse, string buttonText)
+{
+	if (buttonText == "EXIT")
+	{
+		bool wynik = exitGame.containsMouse(mouse);
+		return wynik;
+	}
+	if (buttonText == "BACK TO MENU")
+	{
+		bool wynik = backToMenu.containsMouse(mouse);
+		return wynik;
+	}
+}
+
+void Interface::changeColorOfTextButtonGameOver(string buttonText, Color color)
+{
+	if (buttonText == "EXIT")
+	{
+		exitGame.changeColor(color);
+	}
+	if (buttonText == "BACK TO MENU")
+	{
+		backToMenu.changeColor(color);
+	}
+}
+
+void Interface::addBackToGameButton()
+{
+	this->add(backToGame);
+}
+
+bool Interface::doesBackToGameButtonContainMouse(Vector2f & mouse, string buttonText)
+{
+	if (buttonText == "BACK TO GAME")
+	{
+		bool wynik = backToGame->containsMouse(mouse);
+		return wynik;
 	}
 }
 

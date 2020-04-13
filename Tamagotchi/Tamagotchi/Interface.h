@@ -42,12 +42,14 @@ class Interface: public tgui::Gui
 
 	TextButton saveGame;
 
+	TextButton gameOver;
+	TextButton exitGame;
+	TextButton backToMenu;
+
+	shared_ptr<GuiButton> backToGame;
 public:
 	Interface(){};
-	//virtual void drawInterface(RenderWindow & window) = 0;
-	//FloatRect gGlobalBounds();
-	//void changeColor(Color textColor);
-	//virtual bool containsMouse(Vector2f & mouse)=0;
+	void setParametersOfInterfaceElements();
 	void addTextButtonsMenu();
 	void drawTextButtonsMenu(RenderWindow & window);
 	bool doesTextButtonsMenuContainMouse(Vector2f & mouse, string buttonText);
@@ -68,4 +70,10 @@ public:
 	void addSavedGame();
 	void drawSavedGame(RenderWindow & window);
 	void setValuesOfProgBars(string progBarName,int value);
+	void addTextButtonsGameOver();
+	void drawTextButtonsGameOver(RenderWindow & window);
+	bool doesTextButtonGameOverContainMouse(Vector2f & mouse, string buttonText);
+	void changeColorOfTextButtonGameOver(string buttonText, Color color);
+	void addBackToGameButton();
+	bool doesBackToGameButtonContainMouse(Vector2f & mouse, string buttonText);
 };

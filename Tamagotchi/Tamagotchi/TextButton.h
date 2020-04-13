@@ -16,7 +16,6 @@ class TextButton
 	Font font;
 	string buttonText;
 public:
-	//MButton() {};
 	TextButton() {};
 	void drawTextButton(RenderWindow & window);
 	bool containsMouse(Vector2f & mouse);
