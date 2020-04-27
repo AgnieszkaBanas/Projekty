@@ -92,7 +92,6 @@ void Game::startGame()
 	for(int i=0;i<100;i++)
 	background.setTextureRect(IntRect(0, 0, suma += 1200, 800));
 	
-	//backgroundTexture.setRepeated(true);
 	Vector2f position(0, 0);
 	
 	Event event;
@@ -314,7 +313,7 @@ void Game::updateGame()
 	}
 }
 
-void Game::addTextAndScore()
+void Game::addInterfaceElements()
 {
 	myInterface.setTarget(window);
 	myInterface.setParametersOfInterfaceElements();
@@ -478,13 +477,12 @@ void Game::playground()
 			if (event.mouseButton.button == sf::Mouse::Left)
 			{
 				cout << "the right button was pressed" <<endl;
-				sf::Vector2i localPosition = sf::Mouse::getPosition(window);
+				Vector2i localPosition = Mouse::getPosition(window);
 				dynamicObjects.push_back(new Box(localPosition.x, localPosition.y, 50));
 			}
 		}
 		sleep(milliseconds(20));
 		
-		window.clear();
 		window.draw(background);
 		if (gameClock->getCounter() == 0)
 		{
@@ -511,7 +509,9 @@ void Game::playground()
 		gameClock->drawDynamicObject(window);
 		animal->drawAnimal(window);
 		window.display();
+		window.clear();
 	}
+	myInterface.removeAllWidgets();
 	this->updateGame();
 }
 
@@ -612,6 +612,7 @@ void Game::continueGame()
 				myInterface.setValuesOfProgBars("PLAY", data.pBV3);
 			
 				animal->setColorIterator(data.color);
+				animal->setInitialPosition();
 				gameState = "new game";
 			}
 			if (myInterface.doesTguiChooseAnimalContainMouse(mouse3, "CAT"))
@@ -621,7 +622,8 @@ void Game::continueGame()
 				data = repository->readData();
 				animal = new Cat("cat1.png", 0, 785, 5);
 				animal->setColorIterator(data.color);
-			
+				animal->setInitialPosition();
+
 				myInterface.setValuesOfProgBars("EAT", data.pBV1);
 				myInterface.setValuesOfProgBars("SLEEP", data.pBV2);
 				myInterface.setValuesOfProgBars("PLAY", data.pBV3);

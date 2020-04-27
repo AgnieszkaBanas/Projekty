@@ -66,7 +66,7 @@ public:
 	void startGame();
 	void gameOver();
 	void updateGame();
-	void addTextAndScore();
+	void addInterfaceElements();
 	void setBackground(string bSource);
 	void chooseColor();
 	void chooseAnimal();

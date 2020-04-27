@@ -5,6 +5,6 @@ using namespace sf;
 int main()
 {
 	Game gra;
-	gra.addTextAndScore();
+	gra.addInterfaceElements();
 	gra.updateGame();
 }

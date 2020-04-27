@@ -157,8 +157,8 @@
     <ClInclude Include="DynamicObject.h" />
     <ClInclude Include="GameClock.h" />
     <ClInclude Include="Interface.h" />
-    <ClInclude Include="MyButton.h" />
     <ClInclude Include="Cat.h" />
+    <ClInclude Include="InterfaceElement.h" />
     <ClInclude Include="Repository.h" />
     <ClInclude Include="TextButton.h" />
     <ClInclude Include="Dog.h" />

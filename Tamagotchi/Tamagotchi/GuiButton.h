@@ -20,5 +20,4 @@ public:
 	GuiButton() {};
 	void setParameters(int pPosX, int pPosY, int pSize, string pText, int pTextSize);
 	bool containsMouse(Vector2f & mouse);
-	void drawInterface(RenderWindow & window);
 };

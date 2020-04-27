@@ -2,19 +2,6 @@
 #include "TextButton.h"
 #include "GuiButton.h"
 
-/*
-FloatRect Interface::gGlobalBounds()
-{
-	return this->text.getGlobalBounds();
-}
-
-void Interface::changeColor(Color textColor)
-{
-	this->textColor = textColor;
-	this->text.setFillColor(textColor);
-}
-*/
-
 void Interface::setParametersOfInterfaceElements()
 {
 	newGame.setParameters("NEW GAME", Color(24, 34, 65, 76), 120, 420, 200);
