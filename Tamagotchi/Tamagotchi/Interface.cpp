@@ -5,7 +5,7 @@
 void Interface::setParametersOfInterfaceElements()
 {
 	newGame.setParameters("NEW GAME", Color(24, 34, 65, 76), 120, 420, 200);
-	continueGame.setParameters("CONTINUE GAME", Color(0, 0, 0, 255), 100, 375, 350);
+	continueGame.setParameters("CONTINUE GAME", Color(24, 34, 65, 76), 100, 375, 350);
 
 	catButton = make_shared<GuiButton>();
 	dogButton = make_shared<GuiButton>();

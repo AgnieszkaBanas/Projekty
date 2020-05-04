@@ -423,7 +423,7 @@ void Game::chooseAnimal()
 		
 		if (myInterface.doesTguiChooseAnimalContainMouse(mouse3,"CAT"))
 		{
-			animal = new Cat("cat1.png", 0, 785, 5);
+			animal = new Cat("cat1.png", 0, 780, 5);
 			gameState = "choose color";
 		}
 		

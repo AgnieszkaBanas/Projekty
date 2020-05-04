@@ -14,6 +14,8 @@ public:
 	{
 		this->setPosition(posX, posY);
 		this->setFillColor(Color::Red);
+		this->setOutlineThickness(2);
+		this->setOutlineColor(Color(100, 250, 10, 200));
 		this->setSize(Vector2f(size,size));
 	}
 	void update(Animal*&animal, RenderWindow &window);
