@@ -18,17 +18,17 @@ bool TextButton::containsMouse(Vector2f & mouse)
 	}
 }
 
-void TextButton::setParameters(string ptextState, Color pTextColor, int pTextSize, int pX, int pY)
+void TextButton::setParameters(string pText, int pTextSize, Color pTextColor, int pSize, int pX, int pY)
 {
 	posX = pX;
 	posY = pY;
-	size = pTextSize;
+	size = pSize;
 	textColor = pTextColor;
 	if (!font.loadFromFile("BebasNeue-Regular.ttf"))
 	{
 		cout << "cos poszlo nie tak :|";
 	}
-	buttonText = ptextState;
+	buttonText = pText;
 
 	text.setFont(font);
 	text.setFillColor(textColor);

@@ -1,9 +1,9 @@
 #include "ProgBar.h"
 
-void ProgBar::setParameters(int pPosX, int pPosY, int pSize)
+void ProgBar::setParameters(string pText, int pTextSize, Color pTextColor, int pSize, int pX, int pY)
 {
-	posX = pPosX;
-	posY = pPosY;
+	posX = pX;
+	posY = pY;
 	size = pSize;
 	//this->create();
 	this->setSize(size, size + 100);

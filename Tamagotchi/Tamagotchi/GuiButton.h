@@ -1,18 +1,16 @@
 #pragma once
 #include <fstream>
 #include <TGUI/TGUI.hpp>
+#include "InterfaceElement.h"
 using namespace std;
 using namespace sf;
 
 
-class GuiButton: public tgui::Button
+class GuiButton: public InterfaceElement, public tgui::Button
 {
-	int posX, posY;
 	int textSize;
-	int sizeButton;
-	string buttonText;
 public:
-	GuiButton() {};
-	void setParameters(int pPosX, int pPosY, int pSize, string pText, int pTextSize);
+	//GuiButton() {};
+	void setParameters(string pText, int pTextSize, Color pTextColor, int pSize, int pX, int pY);
 	bool containsMouse(Vector2f & mouse);
 };

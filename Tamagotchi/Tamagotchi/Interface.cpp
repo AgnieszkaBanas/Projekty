@@ -4,49 +4,49 @@
 
 void Interface::setParametersOfInterfaceElements()
 {
-	newGame.setParameters("NEW GAME", Color(24, 34, 65, 76), 120, 420, 200);
-	continueGame.setParameters("CONTINUE GAME", Color(24, 34, 65, 76), 100, 375, 350);
+	newGame.setParameters("NEW GAME",0, Color(24, 34, 65, 76), 120, 420, 200);
+	continueGame.setParameters("CONTINUE GAME",0, Color(24, 34, 65, 76), 100, 375, 350);
 
 	catButton = make_shared<GuiButton>();
 	dogButton = make_shared<GuiButton>();
-	catButton->setParameters(450, 400, 80, "CAT", 30);
-	dogButton->setParameters(650, 400, 80, "DOG", 30);
+	catButton->setParameters("CAT", 30, Color::Black, 80,450, 400);
+	dogButton->setParameters("DOG", 30, Color::Black, 80,650, 400);
 
 	firstColor = make_shared<GuiButton>();
 	secondColor = make_shared<GuiButton>();
 	thirdColor = make_shared<GuiButton>();
-	firstColor->setParameters(250, 500, 90, "1", 40);
-	secondColor->setParameters(550, 500, 90, "2", 40);
-	thirdColor->setParameters(850, 500, 90, "3", 40);
+	firstColor->setParameters("1",40,Color::Black,90,250, 500);
+	secondColor->setParameters("2",40, Color::Black,90,550, 500);
+	thirdColor->setParameters("3",40,Color::Black,90,850, 500);
 
 	eat = make_shared<GuiButton>();
 	sleep = make_shared<GuiButton>();
 	play = make_shared<GuiButton>();
-	eat->setParameters(200, 10, 50, "EAT", 20);
-	sleep->setParameters(300, 10, 50, "SLEEP", 20);
-	play->setParameters(400, 10, 50, "PLAY", 20);
+	eat->setParameters("EAT",20,Color::Black,50,200, 10);
+	sleep->setParameters("SLEEP", 20, Color::Black, 50, 300, 10);
+	play->setParameters("PLAY", 20, Color::Black, 50, 400, 10);
 
 	hungry = make_shared<GuiButton>();
 	tired = make_shared<GuiButton>();
 	fun = make_shared<GuiButton>();
-	hungry->setParameters(810, 40, 30, "HUNGRY", 20);
-	tired->setParameters(910, 40, 30, "TIRED", 20);
-	fun->setParameters(1010, 40, 30, "FUN", 20);
+	hungry->setParameters("HUNGRY",20,Color::Black, 25,815, 20);
+	tired->setParameters("TIRED", 20, Color::Black,25, 915, 20);
+	fun->setParameters("FUN", 20, Color::Black, 25,1005, 20);
 
 	progBar1 = make_shared<ProgBar>();
 	progBar2 = make_shared<ProgBar>();
 	progBar3 = make_shared<ProgBar>();
-	progBar1->setParameters(820, 100, 50);
-	progBar2->setParameters(920, 100, 50);
-	progBar3->setParameters(1020, 100, 50);
+	progBar1->setParameters("", 30, Color::Black, 70, 820, 50);
+	progBar2->setParameters("", 30, Color::Black, 70, 920, 50);
+	progBar3->setParameters("", 30, Color::Black, 70, 1010, 50);
 
 	yes = make_shared<GuiButton>();
 	no = make_shared<GuiButton>();
-	yes->setParameters(440, 400, 90, "YES", 40);
-	no->setParameters(640, 400, 90, "NO", 40);
+	yes->setParameters("YES",30, Color::Black,60,440, 400);
+	no->setParameters("NO", 30, Color::Black, 60,640, 400);
 
 	backToGame = make_shared<GuiButton>();
-	backToGame->setParameters(800, 650, 100, "BACK TO GAME", 20);
+	backToGame->setParameters("BACK TO GAME", 20, Color::Black, 80, 800, 650);
 }
 
 void Interface::addTextButtonsMenu()
@@ -145,13 +145,13 @@ void Interface::addElementsOfGame()
 	this->add(sleep);
 	this->add(play);
 
-	this->add(hungry);
-	this->add(tired);
-	this->add(fun);
-
 	this->add(progBar1);
 	this->add(progBar2);
 	this->add(progBar3);
+
+	this->add(hungry);
+	this->add(tired);
+	this->add(fun);
 }
 
 void Interface::incrementValuesOfProgBar()
@@ -225,7 +225,7 @@ void Interface::addSaveElements()
 	this->add(yes);
 	this->add(no);
 
-	wantSaveGame.setParameters("DO YOU WANT SAVE THE GAME?", Color::Red, 80, 220, 250);
+	wantSaveGame.setParameters("DO YOU WANT SAVE THE GAME?",20, Color::Red, 80, 220, 250);
 }
 
 void Interface::drawWantToSave(RenderWindow & window)
@@ -249,7 +249,7 @@ bool Interface::doesTguiWantSaveGameContainMouse(Vector2f & mouse, string button
 
 void Interface::addSavedGame()
 {
-	saveGame.setParameters("YOU SAVED THE GAME!", Color::Red, 150, 120, 280);
+	saveGame.setParameters("YOU SAVED THE GAME!",20, Color::Red, 150, 120, 280);
 }
 
 void Interface::drawSavedGame(RenderWindow & window)
@@ -275,9 +275,9 @@ void Interface::setValuesOfProgBars(string progBarName,int value)
 
 void Interface::addTextButtonsGameOver()
 {
-	gameOver.setParameters("GAME OVER", Color::Red, 110, 400, 200);
-	exitGame.setParameters("EXIT", Color(24, 25, 40), 90, 480, 300);
-	backToMenu.setParameters("BACK TO MENU", Color::Red, 100, 400, 450);
+	gameOver.setParameters("GAME OVER",20, Color::Red, 110, 400, 200);
+	exitGame.setParameters("EXIT", 20,Color(24, 25, 40), 90, 480, 300);
+	backToMenu.setParameters("BACK TO MENU",20, Color::Red, 100, 400, 450);
 }
 
 void Interface::drawTextButtonsGameOver(RenderWindow & window)

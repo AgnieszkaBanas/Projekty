@@ -6,6 +6,14 @@ void Box::update(Animal *& animal, RenderWindow &window)
 	{
 		this->setFillColor(Color::Green);
 	}
+	if ((this->getPosition().x <= animal->getPosition().x + 32) && (this->getPosition().x + 50 >= animal->getPosition().x + 32) && (this->getPosition().y <= animal->getPosition().y + 32) && (this->getPosition().y + 50 >= animal->getPosition().y + 32))
+	{
+		this->setFillColor(Color::Green);
+	}
+	if ((this->getPosition().x <= animal->getPosition().x + 32) && (this->getPosition().x + 50 >= animal->getPosition().x + 32) && (this->getPosition().y <= animal->getPosition().y + 128) && (this->getPosition().y + 50 >= animal->getPosition().y + 128))
+	{
+		this->setFillColor(Color::Green);
+	}
 }
 
 void Box::drawDynamicObject(RenderWindow & window)

@@ -8,15 +8,15 @@ bool GuiButton::containsMouse(Vector2f & mouse)
 		return false;
 }
 
-void GuiButton::setParameters(int pPosX, int pPosY, int pSize, string pText, int pTextSize)
+void GuiButton::setParameters(string pText,int pTextSize, Color pTextColor, int pSize, int pX, int pY)
 {
-	sizeButton = pSize;
+	size = pSize;
 	buttonText = pText;
-	posX = pPosX;
-	posY = pPosY;
+	posX = pX;
+	posY = pY;
 	textSize = pTextSize;
 	this->setText(buttonText);
-	this->setSize(sizeButton + 50, sizeButton);
+	this->setSize(size + 50, size);
 	this->setPosition(posX, posY);
 
 	this->setInheritedFont("BebasNeue-Regular.ttf");
