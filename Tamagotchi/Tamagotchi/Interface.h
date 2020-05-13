@@ -67,10 +67,8 @@ public:
 	void addSaveElements();
 	void drawWantToSave(RenderWindow & window);
 	bool doesTguiWantSaveGameContainMouse(Vector2f & mouse, string buttonText);
-	void addSavedGame();
 	void drawSavedGame(RenderWindow & window);
 	void setValuesOfProgBars(string progBarName,int value);
-	void addTextButtonsGameOver();
 	void drawTextButtonsGameOver(RenderWindow & window);
 	bool doesTextButtonGameOverContainMouse(Vector2f & mouse, string buttonText);
 	void changeColorOfTextButtonGameOver(string buttonText, Color color);

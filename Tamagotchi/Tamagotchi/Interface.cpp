@@ -47,6 +47,14 @@ void Interface::setParametersOfInterfaceElements()
 
 	backToGame = make_shared<GuiButton>();
 	backToGame->setParameters("BACK TO GAME", 20, Color::Black, 80, 800, 650);
+
+	saveGame.setParameters("YOU SAVED THE GAME!", 20, Color::Red, 150, 120, 280);
+
+	gameOver.setParameters("GAME OVER", 20, Color::Red, 110, 400, 200);
+	exitGame.setParameters("EXIT", 20, Color(24, 25, 40), 90, 500, 320);
+	backToMenu.setParameters("BACK TO MENU", 20, Color::Red, 100, 370, 420);
+
+	wantSaveGame.setParameters("DO YOU WANT SAVE THE GAME?", 20, Color::Red, 80, 220, 250);
 }
 
 void Interface::addTextButtonsMenu()
@@ -224,8 +232,6 @@ void Interface::addSaveElements()
 {
 	this->add(yes);
 	this->add(no);
-
-	wantSaveGame.setParameters("DO YOU WANT SAVE THE GAME?",20, Color::Red, 80, 220, 250);
 }
 
 void Interface::drawWantToSave(RenderWindow & window)
@@ -247,11 +253,6 @@ bool Interface::doesTguiWantSaveGameContainMouse(Vector2f & mouse, string button
 	}
 }
 
-void Interface::addSavedGame()
-{
-	saveGame.setParameters("YOU SAVED THE GAME!",20, Color::Red, 150, 120, 280);
-}
-
 void Interface::drawSavedGame(RenderWindow & window)
 {
 	saveGame.drawTextButton(window);
@@ -271,13 +272,6 @@ void Interface::setValuesOfProgBars(string progBarName,int value)
 	{
 		progBar3->setValue(value);
 	}
-}
-
-void Interface::addTextButtonsGameOver()
-{
-	gameOver.setParameters("GAME OVER",20, Color::Red, 110, 400, 200);
-	exitGame.setParameters("EXIT", 20,Color(24, 25, 40), 90, 480, 300);
-	backToMenu.setParameters("BACK TO MENU",20, Color::Red, 100, 400, 450);
 }
 
 void Interface::drawTextButtonsGameOver(RenderWindow & window)

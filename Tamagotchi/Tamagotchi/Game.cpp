@@ -265,7 +265,6 @@ void Game::updateGame()
 	if (gameState == "game over")
 	{
 		window.setView(window.getDefaultView());
-		myInterface.addTextButtonsGameOver();
 		this->gameOver();
 	}
 	if (gameState == "exit")
@@ -303,7 +302,6 @@ void Game::updateGame()
 	}
 	if (gameState == "saving game")
 	{
-		myInterface.addSavedGame();
 		this->savingGame();
 	}
 	if (gameState == "continue game")
@@ -393,12 +391,6 @@ void Game::chooseColor()
 		{
 			(*it).Draw(window);
 		}
-		/*
-		for (int i = 0; i < animalPicture.size(); i++)
-		{
-			animalPicture[i]->Draw(window);
-		}
-		*/
 		window.display();
 	}
 	myInterface.removeAllWidgets();
